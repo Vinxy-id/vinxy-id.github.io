@@ -1,39 +1,51 @@
-# Alvin Widiantara's Personal Portfolio 🚀
+# Alvin Widiantara — Personal Portfolio Showcase
 
-Selamat datang di repositori web portofolio tahun 2025 milik **Alvin Widiantara!** ✨  
-Sebuah situs desain antarmuka (*UI*) responsif bertemakan *dark glassmorphism* yang berfungsi sebagai halaman pamer (*showcase*) hasil karya dalam lingkup Desain Grafis, Editor Video, hingga Desain UI/UX.
+Official GitHub User Page repository for **Alvin Widiantara (Vinxy-ID)**.  
+A responsive single-page application (SPA) featuring a dark glassmorphism aesthetic, showcasing works across UI/UX Design, Web & Mobile Development, Graphic Design, and Multimedia Production.
 
-🔗 **Pratinjau Langsung (Live View):** [Kunjungi Portofolio](https://vinxy-id.github.io/Portofolio-2025/)
+Live Website: **[https://vinxy-id.github.io/](https://vinxy-id.github.io/)**
 
 ---
 
-## 🎨 Tampilan dan Fitur
-- **Desain Modern (Glassmorphism)** – Penggunaan *backdrop filter* buram pada hampir seluruh elemen antarmuka, memberikan kesan futuristik, premium, namun terstruktur rapi.
-- **Interaksi Mouse Cerdas** – Visual kursor (*mouse follower*) dan latar lingkaran cahaya interaktif yang mengikuti pergerakan tetikus pada area Portofolio (PC only).
-- **Sepenuhnya Responsif (Mobile-Friendly)** – Dapat dibuka dan tetap interaktif diakses melalui ujung jari (*smartphone*) berkat Menu Hamburgernya yang ciamik di ujung kanan atas layar.
-- **Formulir Kontak Otomatis** – Formulir *Contact* terhubung bebas spam dengan perlindungan bot melalui ekosistem _EmailJS_! Layar penuh dilengkapi perlindungan notifikasi pop-up memakai _SweetAlert2_.
+## Highlights & Features
+- **Modern Glassmorphism Architecture**: Backdrop blur layers, subtle glowing borders, and smooth transitions.
+- **Single Page Application (SPA)**: Instant section switching with browser history pushState integration and responsive mobile menu.
+- **Dynamic Portfolio Showcase**: Live category filtering (Development, UI/UX Design, Graphic Design, Video Editing) linked to real GitHub repositories and project assets.
+- **Automated Contact Channel**: Integrated EmailJS pipeline with interactive feedback notifications powered by SweetAlert2.
+- **Zero Heavy Dependencies**: Pure semantic HTML5, modern CSS3 (Flexbox/Grid, clamp variables, hardware-accelerated animations), and Vanilla ES6+ JavaScript.
 
-## 🛠️ Teknologi yang Digunakan
-Situs mini ini dipogram sepenuhnya dari awal menggunakan standar industri dasar tanpa menggunakan kerangka kerja (framework stack):
-- **HTML5** (Semantik Murni)
-- **CSS3** dengan Flexbox & CSS Grid, Custom Properties, dan Native Animation 
-- **Vanilla JavaScript** (ES6+)
-- **RemixIcon** (v4.7.0 – Font Web Icon)
-- **Pihak Ketiga JS:** `EmailJS` API & `SweetAlert2`
+---
 
-## 📂 Struktur Proyek
+## Tech Stack
+- **Markup & Layout**: Semantic HTML5
+- **Styling**: CSS3 (Glassmorphism, CSS Custom Properties, Animations)
+- **Scripting**: Vanilla JavaScript (ES6+ SPA routing, dynamic DOM filters, mouse parallax)
+- **Icons**: [Remix Icon](https://remixicon.com/)
+- **Libraries**: [EmailJS](https://www.emailjs.com/), [SweetAlert2](https://sweetalert2.github.io/)
+- **Hosting**: GitHub Pages (`vinxy-id.github.io`)
+
+---
+
+## Project Structure
 ```text
-Portofolio-2025/
-├── assets/           # Gambar, Foto Latar, & Media Statis 
-├── css/              # Kumpulan Gaya dan Desain (.css)
-├── js/               # Kode-kode Logika dan Penghubung (.js)
-├── index.html        # Pengarah ke Home
-├── home.html         # Halaman Muka Profil
-├── about.html        # Kemampuan/Keterampilan (Skillbars)
-├── portofolio.html   # Pemuatan Galeri (Hover Filter CSS)
-├── services.html     # Daftar Harga dan Penawaran UI
-└── contact.html      # Formulir Surat Langsung (Direct Mail)
+vinxy-id.github.io/
+├── assets/
+│   ├── projects/          # High-resolution screenshots of featured work
+│   ├── background.jpg     # Ambient background visual
+│   ├── me11.png           # Profile photo
+│   └── adobe.jpeg         # Video production asset
+├── css/
+│   └── style.css          # Glassmorphism design system & responsive styling
+├── js/
+│   └── main.js            # Unified SPA logic, filter transitions, and contact form
+├── index.html             # Single Page Application entrypoint
+└── README.md              # Project documentation
 ```
 
+---
 
-
+## Author
+**Alvin Widiantara (Vinxy-ID)**  
+- GitHub: [@Vinxy-id](https://github.com/Vinxy-id)  
+- LinkedIn: [Alvin Widiantara](https://www.linkedin.com/in/alvin-widiantara-041067360/)  
+- Email: [alvinwdntr@gmail.com](mailto:alvinwdntr@gmail.com)

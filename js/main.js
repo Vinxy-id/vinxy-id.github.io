@@ -141,7 +141,8 @@ function initPortfolio() {
                 const filter = this.getAttribute('data-filter');
                 
                 portfolioItems.forEach(item => {
-                    if (filter === 'all' || item.getAttribute('data-category') === filter) {
+                    const categories = (item.getAttribute('data-category') || '').trim().split(/\s+/);
+                    if (filter === 'all' || categories.includes(filter)) {
                         item.style.display = 'block';
                         setTimeout(() => {
                             item.style.opacity = '1';
@@ -188,9 +189,9 @@ function initContact() {
                 
                 Swal.fire({
                     icon: 'success',
-                    title: 'Message Sent! 🎉',
+                    title: 'Message Sent!',
                     text: 'Thank you! I will reply within 24 hours.',
-                    background: 'rgba(34, 34, 34, 0.9)',
+                    background: 'rgba(34, 34, 34, 0.95)',
                     color: '#fff',
                     confirmButtonColor: '#fff',
                     confirmButtonText: '<span style="color:#222">OK</span>'
