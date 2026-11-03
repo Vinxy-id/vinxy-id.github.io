@@ -13,6 +13,7 @@ import ContactSection from './components/ContactSection';
 import ContactAgent from './components/ContactAgent';
 import CustomCursor from './components/CustomCursor';
 import ThemeToggle from './components/ThemeToggle';
+import SectionReveal from './components/SectionReveal';
 import { motion, useScroll, useSpring, AnimatePresence } from 'motion/react';
 
 export default function App() {
@@ -139,13 +140,28 @@ export default function App() {
         </div>
       </nav>
 
-      {/* Main Content Sections */}
+      {/* Main Content Sections with Spring Reveal */}
       <Hero />
-      <ProjectGrid />
-      <JourneyTimeline />
-      <SkillGalaxy />
-      <ServicesSection />
-      <ContactSection />
+
+      <SectionReveal>
+        <ProjectGrid />
+      </SectionReveal>
+
+      <SectionReveal>
+        <JourneyTimeline />
+      </SectionReveal>
+
+      <SectionReveal>
+        <SkillGalaxy />
+      </SectionReveal>
+
+      <SectionReveal>
+        <ServicesSection />
+      </SectionReveal>
+
+      <SectionReveal>
+        <ContactSection />
+      </SectionReveal>
 
       {/* Editorial Footer */}
       <footer className="py-20 px-4 text-center border-t border-theme-border/60 bg-theme-bg/60">
@@ -185,7 +201,7 @@ export default function App() {
           </div>
 
           <div className="text-[10px] font-mono text-theme-muted/60">
-            &copy; {new Date().getFullYear()} Alvin Widiantara (Vinxy-ID). Crafted with React 19, Vite, Tailwind CSS & Motion.
+            &copy; {new Date().getFullYear()} Alvin Widiantara (Vinxy-ID). Crafted with React 19, Vite, Three.js, Tailwind CSS & Motion.
           </div>
         </div>
       </footer>

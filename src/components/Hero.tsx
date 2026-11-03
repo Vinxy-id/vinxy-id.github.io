@@ -6,6 +6,7 @@
 import { useState } from 'react';
 import { motion } from 'motion/react';
 import { ArrowDown, Download, Sparkles, Copy, Check, MapPin, Github, Linkedin, Instagram, Trophy, Code2, Cpu } from 'lucide-react';
+import ThreeCanvas from './ThreeCanvas';
 
 export default function Hero() {
   const [copied, setCopied] = useState(false);
@@ -35,14 +36,19 @@ export default function Hero() {
       <div className="absolute top-1/3 left-1/4 w-[350px] h-[350px] bg-cyan-500/10 rounded-full blur-[120px] pointer-events-none animate-pulse" />
       <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-blue-700/10 rounded-full blur-[140px] pointer-events-none" />
 
-      <div className="relative z-10 max-w-5xl mx-auto flex flex-col items-center">
+      {/* Interactive Three.js 3D Canvas Background */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[320px] h-[320px] sm:w-[480px] sm:h-[480px] md:w-[620px] md:h-[620px] z-0 opacity-60 hover:opacity-100 transition-opacity duration-700 pointer-events-auto">
+        <ThreeCanvas className="w-full h-full" />
+      </div>
+
+      <div className="relative z-10 max-w-5xl mx-auto flex flex-col items-center pointer-events-none">
         
         {/* Availability Badge & Location */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className="flex flex-wrap items-center justify-center gap-2 mb-8"
+          className="flex flex-wrap items-center justify-center gap-2 mb-8 pointer-events-auto"
         >
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full glass-panel border border-brand-primary/30 text-xs font-mono">
             <span className="relative flex h-2 w-2">
@@ -63,8 +69,9 @@ export default function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+          className="pointer-events-auto"
         >
-          <h1 className="font-display text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-extrabold tracking-tight leading-[0.95] mb-6 text-theme-text">
+          <h1 className="font-display text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-extrabold tracking-tight leading-[0.95] mb-6 text-theme-text drop-shadow-sm">
             ALVIN <span className="text-gradient">WIDIA</span>NTARA
           </h1>
 
@@ -73,10 +80,14 @@ export default function Hero() {
             <span>Creative Technologist & UI/UX Architect</span>
           </div>
           
-          <p className="max-w-3xl mx-auto text-base sm:text-lg md:text-xl text-theme-dim font-normal leading-relaxed mb-10 px-4">
+          <p className="max-w-3xl mx-auto text-base sm:text-lg md:text-xl text-theme-dim font-normal leading-relaxed mb-4 px-4">
             The intersection of <span className="text-theme-text font-semibold">Aesthetic Sensation</span> and <span className="text-theme-text font-semibold">Computational Logic</span>. 
             Designing high-fidelity UI/UX, architecting Web-GIS platforms, and engineering fluid applications from prototype to production.
           </p>
+
+          <span className="font-mono text-[10px] uppercase tracking-widest text-brand-primary/70 block mb-10">
+            &bull; Interactive 3D Core in background &bull; Drag or move mouse to inspect &bull;
+          </span>
         </motion.div>
 
         {/* Action Buttons & Copy Email Chip */}
@@ -84,7 +95,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-          className="flex flex-wrap items-center justify-center gap-4 mb-14"
+          className="flex flex-wrap items-center justify-center gap-4 mb-14 pointer-events-auto"
         >
           <motion.button
             whileHover={{ scale: 1.04 }}
@@ -107,7 +118,7 @@ export default function Hero() {
             <span>Download CV</span>
           </motion.a>
 
-          {/* Quick Copy Email Button (21st.dev style) */}
+          {/* Quick Copy Email Button */}
           <motion.button
             whileHover={{ scale: 1.04 }}
             whileTap={{ scale: 0.96 }}
@@ -134,9 +145,9 @@ export default function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-          className="w-full grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-4xl px-4"
+          className="w-full grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-4xl px-4 pointer-events-auto"
         >
-          {stats.map((item, idx) => {
+          {stats.map((item) => {
             const Icon = item.icon;
             return (
               <div
@@ -165,7 +176,7 @@ export default function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.5, duration: 0.8 }}
-          className="flex items-center gap-3 mt-10"
+          className="flex items-center gap-3 mt-10 pointer-events-auto"
         >
           <a
             href="https://github.com/Vinxy-id"
@@ -203,7 +214,7 @@ export default function Hero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1, duration: 1 }}
-        className="mt-14 z-10 flex flex-col items-center gap-2 cursor-pointer"
+        className="mt-14 z-10 flex flex-col items-center gap-2 cursor-pointer pointer-events-auto"
         onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
       >
         <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-theme-muted">
