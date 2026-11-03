@@ -85,10 +85,10 @@ export default function JourneyTimeline() {
           return (
             <motion.div
               key={item.year + item.role}
-              initial={{ opacity: 0, y: 25 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: idx * 0.1, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-              viewport={{ once: true }}
+              initial={{ opacity: 0, scale: 0.98 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ delay: idx * 0.08, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+              viewport={{ once: false, amount: 0.1 }}
             >
               <SpotlightCard className="p-8 h-full flex flex-col justify-between">
                 <div>

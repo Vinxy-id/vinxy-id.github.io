@@ -66,8 +66,8 @@ export default function Hero() {
 
         {/* Big Editorial Headline */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, scale: 0.98 }}
+          animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
           className="pointer-events-auto"
         >
@@ -92,8 +92,8 @@ export default function Hero() {
 
         {/* Action Buttons & Copy Email Chip */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, scale: 0.98 }}
+          animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
           className="flex flex-wrap items-center justify-center gap-4 mb-14 pointer-events-auto"
         >
@@ -142,8 +142,8 @@ export default function Hero() {
 
         {/* Quick Stats Bento Row */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, scale: 0.98 }}
+          animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
           className="w-full grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-4xl px-4 pointer-events-auto"
         >
