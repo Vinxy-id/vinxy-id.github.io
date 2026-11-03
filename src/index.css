@@ -1,0 +1,71 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Space Grotesk", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+
+  --color-brand-primary: #3B82F6;
+  --color-brand-secondary: #60A5FA;
+  --color-brand-accent: #1E40AF;
+  
+  --color-theme-bg: var(--bg-color);
+  --color-theme-text: var(--text-color);
+  --color-theme-muted: var(--text-muted);
+  --color-theme-dim: var(--text-dim);
+  --color-theme-border: var(--border-color);
+  --color-theme-glass: var(--glass-bg);
+}
+
+:root {
+  --bg-color: #020617;
+  --text-color: #ffffff;
+  --text-muted: rgba(255, 255, 255, 0.4);
+  --text-dim: rgba(255, 255, 255, 0.6);
+  --border-color: rgba(255, 255, 255, 0.1);
+  --panel-bg: rgba(255, 255, 255, 0.03);
+  --glass-bg: rgba(2, 6, 23, 0.4);
+  --gradient-start: #ffffff;
+
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  color-scheme: dark;
+}
+
+:root[data-theme='light'] {
+  --bg-color: #f8fafc;
+  --text-color: #0f172a;
+  --text-muted: rgba(15, 23, 42, 0.5);
+  --text-dim: rgba(15, 23, 42, 0.7);
+  --border-color: rgba(15, 23, 42, 0.1);
+  --panel-bg: rgba(15, 23, 42, 0.03);
+  --glass-bg: rgba(248, 250, 252, 0.7);
+  --gradient-start: #0f172a;
+  color-scheme: light;
+}
+
+body {
+  margin: 0;
+  overflow-x: hidden;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.glass-panel {
+  background: var(--panel-bg);
+  backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+}
+
+.text-gradient {
+  background: linear-gradient(135deg, var(--gradient-start) 0%, #60A5FA 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.glow {
+  box-shadow: 0 0 30px rgba(59, 130, 246, 0.3);
+}
