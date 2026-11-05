@@ -63,7 +63,7 @@ function Collapsible({
   );
 }
 
-// 4 Flagship Projects with authentic screenshots from D:\Proyek & Lomba
+// 6 Flagship Projects with live web screenshots & authentic assets
 const STICKY_PROJECTS = [
   {
     number: '01',
@@ -77,11 +77,47 @@ const STICKY_PROJECTS = [
       './assets/projects/wattpulse-ocr.png',
     ],
     col2: './assets/projects/wattpulse-dashboard.png',
-    projectRef: PROJECTS[0],
+    projectRef: PROJECTS.find((p) => p.id === 'wattpulse') || PROJECTS[0],
     liveUrl: 'https://wattpulse-ai.vercel.app',
+    isLive: true,
+    liveLabel: 'App',
   },
   {
     number: '02',
+    id: 'web-scm',
+    name: 'E-SCM Marmer Tulungagung',
+    category: 'Enterprise SCM & Cloud',
+    year: '2024 - 2026',
+    tags: ['Laravel 11', 'PostgreSQL', 'Python ARIMA', 'Live: onyxtulungagung.id'],
+    col1: [
+      './assets/projects/scm-dashboard-kpi.png',
+      './assets/projects/scm-live-katalog-page.png',
+    ],
+    col2: './assets/projects/scm-live-hero.png',
+    projectRef: PROJECTS.find((p) => p.id === 'web-scm') || PROJECTS[0],
+    liveUrl: 'https://onyxtulungagung.id',
+    isLive: true,
+    liveLabel: 'Web',
+  },
+  {
+    number: '03',
+    id: 'aqualux',
+    name: 'AQUALUX Swimming Platform',
+    category: 'Production Web',
+    year: '2025',
+    tags: ['React 19', 'TypeScript', 'Tailwind CSS', 'Live on Vercel'],
+    col1: [
+      './assets/projects/aqualux-live-programs.png',
+      './assets/projects/aqualux-live-cta.png',
+    ],
+    col2: './assets/projects/aqualux-live-hero.png',
+    projectRef: PROJECTS.find((p) => p.id === 'aqualux') || PROJECTS[0],
+    liveUrl: 'https://aqualux-delta.vercel.app',
+    isLive: true,
+    liveLabel: 'Web',
+  },
+  {
+    number: '04',
     id: 'ecokiln',
     name: 'EcoKiln Venturi Tiudan',
     category: 'Digital Twin & CleanTech',
@@ -92,11 +128,12 @@ const STICKY_PROJECTS = [
       './assets/projects/ecokiln-dashboard.png',
     ],
     col2: './assets/projects/ecokiln-3d-exploded.png',
-    projectRef: PROJECTS[1],
+    projectRef: PROJECTS.find((p) => p.id === 'ecokiln') || PROJECTS[1],
     liveUrl: 'https://github.com/Vinxy-id',
+    isLive: false,
   },
   {
-    number: '03',
+    number: '05',
     id: 'si-mukti',
     name: 'SI-MUKTI Rantai Pasok',
     category: 'Spatial Logistics & Web-GIS',
@@ -107,11 +144,12 @@ const STICKY_PROJECTS = [
       './assets/projects/ecokiln-portal.png',
     ],
     col2: './assets/projects/si-mukti.jpeg',
-    projectRef: PROJECTS[2],
+    projectRef: PROJECTS.find((p) => p.id === 'si-mukti') || PROJECTS[2],
     liveUrl: 'https://github.com/Vinxy-id/si-mukti',
+    isLive: false,
   },
   {
-    number: '04',
+    number: '06',
     id: 'pantrix',
     name: 'PANTRIX Smart Assistant',
     category: 'Winner Juara 2 CVC II',
@@ -122,8 +160,9 @@ const STICKY_PROJECTS = [
       './assets/projects/pantrix-roadmap.png',
     ],
     col2: './assets/projects/pantrix-prototype.png',
-    projectRef: PROJECTS[3],
+    projectRef: PROJECTS.find((p) => p.id === 'pantrix') || PROJECTS[3],
     liveUrl: 'https://github.com/Vinxy-id/Pantrix',
+    isLive: false,
   },
 ];
 
@@ -142,7 +181,7 @@ function StickyProjectCard({
   onSelect: (p: Project) => void;
   round: string;
 }) {
-  const targetScale = 1 - (total - 1 - index) * 0.035;
+  const targetScale = 1 - (total - 1 - index) * 0.028;
   const start = index / total;
 
   const scale = useTransform(containerProgress, (p) => {
@@ -153,7 +192,7 @@ function StickyProjectCard({
   const brightness = useTransform(containerProgress, (p) => {
     if (index === total - 1) return 1;
     const localP = Math.min(Math.max((p - start) / (1 - start), 0), 1);
-    return 1 - 0.22 * localP;
+    return 1 - 0.2 * localP;
   });
 
   return (
@@ -162,7 +201,7 @@ function StickyProjectCard({
         style={{
           scale,
           filter: useMotionTemplate`brightness(${brightness})`,
-          top: `${index * 26}px`,
+          top: `${index * 22}px`,
           transformOrigin: 'top center',
         }}
         className={`relative w-full max-w-6xl ${round} border border-mist/15 p-5 sm:p-7 md:p-9 shadow-[0_-25px_60px_-25px_rgba(0,0,0,0.9)] bg-ink-soft`}
@@ -181,10 +220,10 @@ function StickyProjectCard({
                 <span className="text-ember font-medium uppercase tracking-[0.25em] text-xs sm:text-sm font-mono">
                   {project.category} &bull; {project.year}
                 </span>
-                {project.id === 'wattpulse' && (
+                {project.isLive && (
                   <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-[9px] font-mono uppercase tracking-widest">
                     <span className="w-1 h-1 rounded-full bg-emerald-400 animate-pulse" />
-                    Live App
+                    Live {project.liveLabel || 'Web'}
                   </span>
                 )}
               </div>
@@ -208,14 +247,14 @@ function StickyProjectCard({
           </div>
 
           <div className="flex items-center gap-3">
-            {project.liveUrl && project.id === 'wattpulse' && (
+            {project.liveUrl && project.isLive && (
               <a
                 href={project.liveUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-1.5 rounded-full bg-ember text-white font-medium uppercase tracking-widest px-4 py-2 sm:px-5 sm:py-2.5 text-xs transition-transform duration-200 hover:scale-105 shadow-md shadow-ember/25"
               >
-                <span>Live App</span>
+                <span>Live {project.liveLabel || 'Web'}</span>
                 <ArrowUpRight className="w-3.5 h-3.5" />
               </a>
             )}

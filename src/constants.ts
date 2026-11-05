@@ -105,17 +105,17 @@ export const PROJECTS: Project[] = [
   {
     id: 'aqualux',
     title: 'AQUALUX Platform',
-    description: 'High-conversion responsive web platform and enrollment system for premier athletic swimming academy with 98+ Google Lighthouse score.',
+    description: 'High-conversion responsive web platform and enrollment system for premier athletic swimming academy with interactive curriculum selectors and 98+ Google Lighthouse score.',
     category: 'Production Web',
-    tags: ['React 19', 'TypeScript', 'Landing Page', 'Lighthouse 98+'],
-    image: './assets/projects/aqualux.webp',
-    link: 'https://github.com/Vinxy-id/Aqualux',
+    tags: ['React 19', 'TypeScript', 'Tailwind CSS', 'Lighthouse 98+'],
+    image: './assets/projects/aqualux-live-hero.png',
+    link: 'https://aqualux-delta.vercel.app',
     vibe: 'Fluid Conversion',
     details: {
       problem: 'Athletic training academies face low digital conversions due to cluttered registration forms and poor mobile responsive layouts.',
       solution: 'Designed and implemented a high-performance landing experience with interactive program selectors, seamless WhatsApp direct lead routing, and audited SEO tags.',
-      impact: 'Achieved a 98+ Lighthouse performance score and boosted lead inquiries by 60%.',
-      tech: ['React', 'TypeScript', 'Tailwind CSS', 'Vite', 'Netlify'],
+      impact: 'Achieved a 98+ Lighthouse performance score, deployed to Vercel production, and boosted lead inquiries by 60%.',
+      tech: ['React 19', 'TypeScript', 'Tailwind CSS v4', 'Vite', 'Framer Motion', 'Vercel'],
     }
   },
   {
@@ -136,18 +136,18 @@ export const PROJECTS: Project[] = [
   },
   {
     id: 'web-scm',
-    title: 'Web SCM Marmer Tulungagung',
-    description: 'End-to-end industrial supply chain management system tracking raw stone quarrying through refined marble delivery.',
-    category: 'Architecture',
-    tags: ['Laravel', 'PostgreSQL', 'SCM', 'Industrial IT'],
-    image: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=800&q=80',
-    link: 'https://github.com/Vinxy-id/web-scm-marmer',
-    vibe: 'Industrial Precision',
+    title: 'E-SCM Marmer Tulungagung',
+    description: 'Sistem informasi rantai pasok digital terpadu klaster IKM Marmer & Onyx Tulungagung dengan integrasi forecasting ARIMA, katalog multi-filter, dan manajemen SPK produksi.',
+    category: 'Enterprise SCM & Cloud',
+    tags: ['Laravel 11', 'PostgreSQL', 'Python ARIMA', 'Live VPS'],
+    image: './assets/projects/scm-live-hero.png',
+    link: 'https://onyxtulungagung.id',
+    vibe: 'Industrial E-Supply Chain',
     details: {
-      problem: 'Marble manufacturers operated with siloed paper logs for quarry extraction, cutting, polishing, and multi-tier distributor orders.',
-      solution: 'Built a centralized supply chain system with real-time stock balance recalculations, automated dispatch notes, and role-based access control.',
-      impact: 'Unified 3 quarrying centers and reduced inventory discrepancy to under 1%.',
-      tech: ['PHP', 'Laravel', 'PostgreSQL', 'Tailwind CSS', 'Alpine.js'],
+      problem: 'Sentra IKM Marmer & Onix Campurdarat menghadapi ketidakpastian stok bahan baku, pencatatan SPK manual, limbah residu yang tidak terukur, dan fluktuasi permintaan musiman tanpa prediksi analitik.',
+      solution: 'Membangun arsitektur E-SCM berbasis Laravel 11, integrasi REST API microservice Python ARIMA untuk peramalan permintaan, pelacakan WIP SPK Kanban, dan katalog e-commerce publik.',
+      impact: 'Diterapkan secara nyata di sentra IKM Tulungagung (UD Cahaya Onix & UD Putra Abadi); live di VPS DomaiNesia dengan sertifikasi SSL HTTPS di https://onyxtulungagung.id.',
+      tech: ['Laravel 11', 'PostgreSQL', 'Python FastAPI', 'ARIMA AI', 'Nginx VPS', 'Tailwind CSS'],
     }
   },
   {
