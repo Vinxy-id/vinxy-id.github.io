@@ -62,7 +62,7 @@ export default function App() {
   ];
 
   return (
-    <main className="grain bg-ink text-mist selection:bg-ember selection:text-white min-h-screen lg:cursor-none transition-colors duration-300 relative overflow-x-hidden font-sans">
+    <main className="grain bg-ink text-mist selection:bg-ember selection:text-white min-h-screen lg:cursor-none transition-colors duration-300 relative overflow-x-clip font-sans">
       <CustomCursor />
       <ThemeToggle />
 
