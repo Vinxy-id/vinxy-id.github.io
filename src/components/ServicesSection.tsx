@@ -3,11 +3,12 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+import React from 'react';
 import { motion } from 'motion/react';
 import { Layers, Globe, Smartphone, Video, ArrowUpRight, CheckCircle2 } from 'lucide-react';
-import SpotlightCard from './SpotlightCard';
 
 interface ServiceItem {
+  number: string;
   id: string;
   title: string;
   tagline: string;
@@ -18,6 +19,7 @@ interface ServiceItem {
 
 const SERVICES: ServiceItem[] = [
   {
+    number: '01',
     id: 'ui-ux',
     title: 'UI/UX & Design Systems',
     tagline: 'Transforming complex product logic into intuitive, pixel-perfect, human-centered interfaces.',
@@ -31,6 +33,7 @@ const SERVICES: ServiceItem[] = [
     techStack: ['Figma', 'Design Systems', 'Prototyping', 'User Research']
   },
   {
+    number: '02',
     id: 'web-gis',
     title: 'Modern Web & Web-GIS Platforms',
     tagline: 'High-performance web applications, geospatial dashboards, and SEO-engineered landing experiences.',
@@ -44,6 +47,7 @@ const SERVICES: ServiceItem[] = [
     techStack: ['React 19', 'TypeScript', 'Tailwind CSS', 'Leaflet GIS', 'PostGIS']
   },
   {
+    number: '03',
     id: 'mobile',
     title: 'Cross-Platform Mobile Apps',
     tagline: 'Smooth, responsive native mobile solutions with sub-60ms interaction response times.',
@@ -57,6 +61,7 @@ const SERVICES: ServiceItem[] = [
     techStack: ['Flutter', 'Dart', 'Custom Shaders', 'Mobile UX']
   },
   {
+    number: '04',
     id: 'motion',
     title: 'Motion Design & Creative Video',
     tagline: 'High-retention digital storytelling with kinetic typography, color grading, and dynamic edits.',
@@ -73,79 +78,88 @@ const SERVICES: ServiceItem[] = [
 
 export default function ServicesSection() {
   return (
-    <section id="services" className="py-28 px-4 md:px-8 max-w-7xl mx-auto">
-      <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
-        <div>
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-primary/10 border border-brand-primary/20 text-brand-primary text-xs font-mono uppercase tracking-widest mb-4">
-            <Layers className="w-3.5 h-3.5 text-brand-primary" />
-            <span>Scope & Capabilities</span>
+    <section
+      id="services"
+      className="relative z-10 bg-[#ece7dd] text-[#1a1714] rounded-t-[40px] sm:rounded-t-[50px] md:rounded-t-[60px] -mt-10 sm:-mt-14 px-5 sm:px-8 md:px-12 pt-24 sm:pt-28 md:pt-36 pb-32 sm:pb-36 shadow-[0_-20px_50px_rgba(0,0,0,0.5)] transition-colors duration-300"
+    >
+      <div className="max-w-7xl mx-auto">
+        {/* Top Paper Metadata */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6 border-b border-[#1a1714]/15 pb-8">
+          <div>
+            <div className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-[0.2em] text-[#1a1714]/60 mb-3">
+              <span className="w-2 h-2 rounded-full bg-ember" />
+              <span>[ 02 ] Capabilities & Architecture</span>
+            </div>
+            <h2 className="font-editorial text-4xl sm:text-6xl md:text-7xl font-black uppercase tracking-tight leading-[0.95] text-[#1a1714]">
+              Turning Bold Ideas Into Fast, Accessible Interfaces.
+            </h2>
           </div>
-          <h2 className="font-display text-4xl sm:text-6xl font-bold tracking-tight text-theme-text">
-            Capabilities.
-          </h2>
+          <p className="text-[#1a1714]/75 max-w-md font-sans text-sm sm:text-base leading-relaxed">
+            From algorithmic data pipelines and spatial mapping to motion showreels — engineered to perform and crafted to captivate.
+          </p>
         </div>
-        <p className="text-theme-muted max-w-md font-medium text-sm sm:text-base leading-relaxed">
-          End-to-end creative technology solutions tailored to build products with uncompromising visual craft and engineering integrity.
-        </p>
-      </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {SERVICES.map((service, idx) => {
-          const Icon = service.icon;
-          return (
-            <motion.div
-              key={service.id}
-              initial={{ opacity: 0, scale: 0.98 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ delay: idx * 0.08, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-              viewport={{ once: false, amount: 0.1 }}
-            >
-              <SpotlightCard className="p-8 h-full flex flex-col justify-between">
-                <div>
-                  <div className="flex items-center justify-between mb-6">
-                    <div className="w-12 h-12 rounded-2xl bg-brand-primary/10 border border-brand-primary/20 flex items-center justify-center text-brand-primary">
-                      <Icon className="w-6 h-6" />
+        {/* Editorial Numbered Rows (01, 02, 03, 04) */}
+        <div className="flex flex-col divide-y divide-[#1a1714]/15">
+          {SERVICES.map((service) => {
+            const Icon = service.icon;
+            return (
+              <div
+                key={service.id}
+                className="py-10 sm:py-14 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start group hover:bg-[#e4ded2]/50 px-4 sm:px-6 -mx-4 sm:-mx-6 rounded-3xl transition-all duration-300"
+              >
+                {/* Huge Editorial Number */}
+                <div className="lg:col-span-2 flex items-baseline gap-4">
+                  <span className="font-editorial text-6xl sm:text-7xl md:text-8xl font-black tracking-tighter text-[#1a1714]/20 group-hover:text-ember transition-colors duration-300">
+                    {service.number}
+                  </span>
+                </div>
+
+                {/* Service Details */}
+                <div className="lg:col-span-5">
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="w-8 h-8 rounded-lg bg-[#1a1714]/5 border border-[#1a1714]/10 flex items-center justify-center text-[#1a1714]">
+                      <Icon className="w-4 h-4" />
                     </div>
-                    <a
-                      href="#contact"
-                      className="inline-flex items-center gap-1.5 text-xs font-mono uppercase tracking-wider text-theme-muted hover:text-brand-primary transition-colors py-1.5 px-3 rounded-full bg-theme-bg/50 border border-theme-border"
-                    >
-                      <span>Inquire</span>
-                      <ArrowUpRight className="w-3.5 h-3.5" />
-                    </a>
+                    <h3 className="font-display text-2xl sm:text-3xl font-bold uppercase tracking-tight text-[#1a1714] group-hover:text-ember transition-colors">
+                      {service.title}
+                    </h3>
                   </div>
-
-                  <h3 className="text-2xl font-display font-bold text-theme-text mb-2">
-                    {service.title}
-                  </h3>
-                  <p className="text-sm text-theme-dim leading-relaxed mb-6 font-normal">
+                  <p className="text-[#1a1714]/80 text-sm sm:text-base leading-relaxed font-normal mb-6">
                     {service.tagline}
                   </p>
 
-                  <div className="space-y-2.5 mb-8">
-                    {service.deliverables.map((item) => (
-                      <div key={item} className="flex items-start gap-2.5 text-xs text-theme-dim">
-                        <CheckCircle2 className="w-4 h-4 text-brand-primary shrink-0 mt-0.5" />
-                        <span>{item}</span>
-                      </div>
+                  {/* Tech stack pills on paper */}
+                  <div className="flex flex-wrap gap-2">
+                    {service.techStack.map((tech) => (
+                      <span
+                        key={tech}
+                        className="px-3 py-1 rounded-full text-xs font-mono uppercase tracking-wider bg-white/70 border border-[#1a1714]/15 text-[#1a1714] font-semibold"
+                      >
+                        {tech}
+                      </span>
                     ))}
                   </div>
                 </div>
 
-                <div className="pt-4 border-t border-theme-border/60 flex flex-wrap gap-1.5">
-                  {service.techStack.map((tech) => (
-                    <span
-                      key={tech}
-                      className="text-[10px] font-mono px-2 py-0.5 rounded bg-theme-bg/60 border border-theme-border text-theme-muted"
-                    >
-                      {tech}
-                    </span>
-                  ))}
+                {/* Deliverables Checklist */}
+                <div className="lg:col-span-5 bg-white/40 p-6 rounded-2xl border border-[#1a1714]/10">
+                  <span className="font-mono text-[10px] uppercase tracking-widest text-[#1a1714]/50 block mb-3 font-bold">
+                    Key Deliverables
+                  </span>
+                  <ul className="space-y-2.5">
+                    {service.deliverables.map((item, idx) => (
+                      <li key={idx} className="flex items-start gap-2.5 text-xs sm:text-sm text-[#1a1714]/85 leading-snug">
+                        <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-              </SpotlightCard>
-            </motion.div>
-          );
-        })}
+              </div>
+            );
+          })}
+        </div>
       </div>
     </section>
   );

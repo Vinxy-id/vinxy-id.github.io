@@ -5,6 +5,7 @@
 
 import { useState, useEffect } from 'react';
 import Hero from './components/Hero';
+import TechMarquee from './components/TechMarquee';
 import ProjectGrid from './components/ProjectGrid';
 import JourneyTimeline from './components/JourneyTimeline';
 import SkillGalaxy from './components/SkillGalaxy';
@@ -14,7 +15,7 @@ import ContactAgent from './components/ContactAgent';
 import CustomCursor from './components/CustomCursor';
 import ThemeToggle from './components/ThemeToggle';
 import SectionReveal from './components/SectionReveal';
-import { motion, useScroll, useSpring, AnimatePresence } from 'motion/react';
+import { motion, useScroll, useSpring } from 'motion/react';
 
 export default function App() {
   const { scrollYProgress } = useScroll();
@@ -42,7 +43,7 @@ export default function App() {
     };
 
     const observer = new IntersectionObserver(handleIntersect, observerOptions);
-    const sections = ['hero', 'projects', 'journey', 'skills', 'services', 'contact'];
+    const sections = ['hero', 'journey', 'services', 'projects', 'skills', 'contact'];
     sections.forEach((id) => {
       const el = document.getElementById(id);
       if (el) observer.observe(el);
@@ -51,130 +52,101 @@ export default function App() {
     return () => observer.disconnect();
   }, []);
 
-  const navItems = [
-    { id: 'projects', label: 'Playground' },
-    { id: 'journey', label: 'Journey' },
-    { id: 'skills', label: 'Matrix' },
-    { id: 'services', label: 'Capabilities' },
-    { id: 'contact', label: 'Connect' },
+  const navLinks = [
+    { href: '#projects', label: 'Work' },
+    { href: '#services', label: 'Services' },
+    { href: '#journey', label: 'About' },
+    { href: '#skills', label: 'Matrix' },
+    { href: '#contact', label: 'Contact' },
   ];
 
   return (
-    <main className="bg-theme-bg text-theme-text selection:bg-brand-primary selection:text-black min-h-screen lg:cursor-none transition-colors duration-300 relative">
+    <main className="bg-[#0c0c0c] text-white selection:bg-brand-primary selection:text-black min-h-screen lg:cursor-none transition-colors duration-300 relative overflow-x-hidden">
       <CustomCursor />
       <ThemeToggle />
 
       {/* Spring Progress Bar */}
       <motion.div
-        className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-brand-primary via-cyan-400 to-brand-secondary z-[1000] origin-left shadow-[0_0_12px_rgba(59,130,246,0.6)] overflow-hidden"
+        className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-brand-primary via-cyan-400 to-amber-500 z-[1000] origin-left shadow-[0_0_12px_rgba(59,130,246,0.6)] overflow-hidden"
         style={{ scaleX }}
-      >
-        <motion.div
-          animate={{
-            x: ['-110%', '210%'],
-          }}
-          transition={{
-            duration: 3,
-            repeat: Infinity,
-            ease: 'easeInOut',
-            repeatDelay: 0.5,
-          }}
-          className="absolute inset-0 bg-gradient-to-r from-transparent via-white/50 to-transparent w-1/2 skew-x-[30deg]"
-        />
-      </motion.div>
+      />
 
-      {/* Floating Vertical Navigation Rail (Desktop) */}
-      <nav className="fixed top-8 left-4 z-[1000] hidden lg:block">
-        <div className="flex flex-col gap-5 items-center">
-          <motion.div
-            whileHover={{ scale: 1.1, rotate: 5 }}
-            whileTap={{ scale: 0.9 }}
-            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="w-10 h-10 rounded-xl bg-brand-primary flex items-center justify-center text-black font-display font-black text-xl cursor-pointer shadow-lg shadow-brand-primary/25"
-            title="Back to Top"
-          >
-            A
-          </motion.div>
-          <div className="h-16 w-px bg-white/10 mx-auto" />
-          <div className="flex flex-col gap-24 items-center pt-8 relative">
-            <div className="absolute left-1/2 -translate-x-1/2 top-8 bottom-0 w-[1px] bg-white/5" />
+      {/* Codecuy-Style Floating Top Navigation Header */}
+      <header className="fixed top-0 left-0 right-0 z-[900] px-5 sm:px-8 md:px-12 py-5 bg-[#0c0c0c]/80 backdrop-blur-xl border-b border-white/5 flex items-center justify-between">
+        {/* Brand Wordmark */}
+        <a
+          href="#"
+          className="font-editorial font-black text-xl tracking-tight text-white flex items-center gap-1 group"
+        >
+          <span>ALVIN</span>
+          <span className="text-brand-primary text-xs font-mono group-hover:rotate-45 transition-transform duration-300">
+            °
+          </span>
+        </a>
 
-            {navItems.map((item) => {
-              const isActive = activeSection === item.id;
-              return (
-                <div key={item.id} className="relative flex items-center justify-center h-7">
-                  <motion.div
-                    className="rotate-90 origin-center whitespace-nowrap"
-                    animate={{
-                      scale: isActive ? 1.1 : 1,
-                    }}
-                  >
-                    <a
-                      href={`#${item.id}`}
-                      className={`font-mono text-[10px] uppercase tracking-[0.35em] transition-all duration-300 block ${
-                        isActive
-                          ? 'text-brand-primary font-bold'
-                          : 'text-theme-muted hover:text-theme-text'
-                      }`}
-                    >
-                      {item.label}
-                    </a>
-                  </motion.div>
-
-                  <AnimatePresence>
-                    {isActive && (
-                      <motion.div
-                        layoutId="nav-dot"
-                        className="absolute left-1/2 -translate-x-1/2 w-1.5 h-1.5 bg-brand-primary rounded-full shadow-[0_0_12px_#3B82F6] z-20"
-                        initial={{ opacity: 0, scale: 0 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        exit={{ opacity: 0, scale: 0 }}
-                        transition={{ type: 'spring', stiffness: 350, damping: 30 }}
-                      />
-                    )}
-                  </AnimatePresence>
-                </div>
-              );
-            })}
-          </div>
+        {/* Center Pill Badge */}
+        <div className="hidden md:inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/5 border border-white/10 text-[11px] font-mono uppercase tracking-widest text-white/80">
+          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+          <span>Creative Technologist & UI/UX Architect</span>
         </div>
-      </nav>
 
-      {/* Main Content Sections with Spring Reveal */}
+        {/* Right Navigation Links */}
+        <nav className="hidden md:flex items-center gap-6 sm:gap-8 pr-12 md:pr-16">
+          {navLinks.map((item) => (
+            <a
+              key={item.label}
+              href={item.href}
+              className="font-mono text-xs uppercase tracking-wider text-white/60 hover:text-white transition-colors"
+            >
+              {item.label}
+            </a>
+          ))}
+        </nav>
+      </header>
+
+      {/* 1. Hero Section (Dark Matte Ink) */}
       <Hero />
 
-      <SectionReveal>
-        <ProjectGrid />
-      </SectionReveal>
+      {/* 2. Infinite Tech Squircle Marquee */}
+      <TechMarquee />
 
+      {/* 3. The Journey & About Me */}
       <SectionReveal>
         <JourneyTimeline />
       </SectionReveal>
 
-      <SectionReveal>
-        <SkillGalaxy />
-      </SectionReveal>
-
+      {/* 4. What I Do / Capabilities (Warm Paper Sheet Layer - Stacks with rounded top) */}
       <SectionReveal>
         <ServicesSection />
       </SectionReveal>
 
+      {/* 5. Selected Work / Projects (Dark Ink Sheet Layer - Stacks over Paper) */}
+      <SectionReveal>
+        <ProjectGrid />
+      </SectionReveal>
+
+      {/* 6. Competency Architecture / Logical Matrix */}
+      <SectionReveal>
+        <SkillGalaxy />
+      </SectionReveal>
+
+      {/* 7. Let's Connect / Collaboration (Final Dark Carbon Sheet Layer) */}
       <SectionReveal>
         <ContactSection />
       </SectionReveal>
 
       {/* Editorial Footer */}
-      <footer className="py-20 px-4 text-center border-t border-theme-border/60 bg-theme-bg/60">
+      <footer className="py-20 px-5 sm:px-8 md:px-12 text-center border-t border-white/10 bg-[#08080a]">
         <div className="max-w-7xl mx-auto flex flex-col items-center">
-          <div className="w-14 h-14 rounded-2xl bg-theme-surface flex items-center justify-center mb-6 border border-theme-border shadow-md">
-            <span className="font-display font-black text-2xl text-brand-primary">A</span>
+          <div className="w-14 h-14 rounded-2xl bg-[#141416] flex items-center justify-center mb-6 border border-white/10 shadow-md">
+            <span className="font-editorial font-black text-2xl text-brand-primary">A</span>
           </div>
           
-          <h3 className="font-display text-2xl md:text-3xl font-bold mb-3 px-4 text-theme-text">
+          <h3 className="font-editorial text-2xl md:text-3xl font-black uppercase tracking-tight mb-3 px-4 text-white">
             Precision in Logic. Clarity in Design.
           </h3>
           
-          <p className="text-theme-muted font-mono text-[11px] md:text-xs uppercase tracking-widest max-w-lg mx-auto leading-loose px-4 mb-8">
+          <p className="text-white/50 font-mono text-[11px] md:text-xs uppercase tracking-widest max-w-lg mx-auto leading-loose px-4 mb-8">
             Designed & Engineered by Alvin Widiantara<br />
             Creative Visual Competition II Winner &bull; Informatics Engineering
           </p>
@@ -193,14 +165,14 @@ export default function App() {
                 href={link.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-mono text-[10px] uppercase tracking-[0.2em] text-theme-muted hover:text-brand-primary transition-colors"
+                className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/50 hover:text-brand-primary transition-colors"
               >
                 {link.name}
               </a>
             ))}
           </div>
 
-          <div className="text-[10px] font-mono text-theme-muted/60">
+          <div className="text-[10px] font-mono text-white/40">
             &copy; {new Date().getFullYear()} Alvin Widiantara (Vinxy-ID). Crafted with React 19, Vite, Three.js, Tailwind CSS & Motion.
           </div>
         </div>

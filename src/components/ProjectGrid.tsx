@@ -7,7 +7,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { PROJECTS } from '../constants';
 import { Project } from '../types';
-import { X, ExternalLink, Code2, Layout, Zap, ChevronDown, Cpu, Sparkles, FolderGit2 } from 'lucide-react';
+import { X, ExternalLink, Code2, Layout, Zap, ChevronDown, Cpu, Sparkles, FolderGit2, ArrowUpRight, Grid, List } from 'lucide-react';
 import SpotlightCard from './SpotlightCard';
 
 function Collapsible({
@@ -66,8 +66,10 @@ function Collapsible({
 
 export default function ProjectGrid() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [hoveredProject, setHoveredProject] = useState<Project>(PROJECTS[0]);
   const [openSection, setOpenSection] = useState<string | null>('problem');
   const [activeFilter, setActiveFilter] = useState<string>('all');
+  const [viewMode, setViewMode] = useState<'chapters' | 'bento'>('chapters');
 
   const filterTabs = [
     { id: 'all', label: 'All Works' },
@@ -87,142 +89,279 @@ export default function ProjectGrid() {
   });
 
   return (
-    <section id="projects" className="py-28 px-4 md:px-8 max-w-7xl mx-auto">
-      <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
-        <div>
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-primary/10 border border-brand-primary/20 text-brand-primary text-xs font-mono uppercase tracking-widest mb-4">
-            <Sparkles className="w-3.5 h-3.5 text-brand-primary" />
-            <span>Selected Projects & Engineering</span>
+    <section
+      id="projects"
+      className="relative z-20 bg-[#0c0c0c] text-white rounded-t-[40px] sm:rounded-t-[50px] md:rounded-t-[60px] -mt-10 sm:-mt-14 px-5 sm:px-8 md:px-12 pt-24 sm:pt-28 md:pt-36 pb-32 shadow-[0_-20px_50px_rgba(0,0,0,0.7)] border-t border-white/10"
+    >
+      <div className="max-w-7xl mx-auto">
+        
+        {/* Section Header */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6 border-b border-white/10 pb-8">
+          <div>
+            <div className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-[0.2em] text-white/50 mb-3">
+              <span className="w-2 h-2 rounded-full bg-brand-primary" />
+              <span>[ 03 ] Selected Work & Engineering</span>
+            </div>
+            <h2 className="font-editorial text-4xl sm:text-6xl md:text-7xl font-black uppercase tracking-tight leading-[0.95] text-white">
+              Shipped From Years Of Curiosity & Code.
+            </h2>
           </div>
-          <h2 className="font-display text-4xl sm:text-6xl font-bold tracking-tight text-theme-text">
-            The Playground.
-          </h2>
+          
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+            <p className="text-white/60 max-w-sm font-sans text-xs sm:text-sm leading-relaxed">
+              Live spatial platforms, gamified mobile tools, and full-stack architectures.
+            </p>
+
+            {/* View Mode Toggle */}
+            <div className="inline-flex p-1 rounded-full bg-[#18181b] border border-white/10 text-xs font-mono">
+              <button
+                onClick={() => setViewMode('chapters')}
+                className={`px-3 py-1.5 rounded-full flex items-center gap-1.5 transition-colors cursor-pointer ${
+                  viewMode === 'chapters' ? 'bg-brand-primary text-white font-bold' : 'text-white/50 hover:text-white'
+                }`}
+                title="Interactive Chapter Switcher (Codecuy Style)"
+              >
+                <List className="w-3.5 h-3.5" />
+                <span>Showcase</span>
+              </button>
+              <button
+                onClick={() => setViewMode('bento')}
+                className={`px-3 py-1.5 rounded-full flex items-center gap-1.5 transition-colors cursor-pointer ${
+                  viewMode === 'bento' ? 'bg-brand-primary text-white font-bold' : 'text-white/50 hover:text-white'
+                }`}
+                title="Bento Grid View"
+              >
+                <Grid className="w-3.5 h-3.5" />
+                <span>Grid</span>
+              </button>
+            </div>
+          </div>
         </div>
-        <p className="text-theme-muted max-w-md font-medium text-sm sm:text-base leading-relaxed">
-          A showcase of live systems, competitive solutions, and production architectures combining high-performance logic with aesthetic direction.
-        </p>
-      </div>
 
-      {/* Filter Tabs (Emil Kowalski spring style) */}
-      <div className="flex flex-wrap items-center gap-2 mb-12 border-b border-theme-border/60 pb-4">
-        {filterTabs.map((tab) => {
-          const isActive = activeFilter === tab.id;
-          return (
-            <button
-              key={tab.id}
-              onClick={() => setActiveFilter(tab.id)}
-              className="relative px-4 py-2 rounded-full text-xs font-mono uppercase tracking-wider transition-colors cursor-pointer"
-            >
-              {isActive && (
-                <motion.div
-                  layoutId="active-project-tab"
-                  className="absolute inset-0 rounded-full bg-brand-primary/15 border border-brand-primary/40"
-                  transition={{ type: 'spring', stiffness: 400, damping: 30 }}
-                />
-              )}
-              <span className={`relative z-10 font-semibold ${isActive ? 'text-brand-primary' : 'text-theme-muted hover:text-theme-text'}`}>
-                {tab.label}
-              </span>
-            </button>
-          );
-        })}
-      </div>
-
-      {/* Bento Grid */}
-      <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <AnimatePresence>
-          {filteredProjects.map((project, idx) => (
-            <motion.div
-              key={project.id}
-              layout
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.95 }}
-              transition={{ duration: 0.4, delay: idx * 0.05 }}
-              onClick={() => setSelectedProject(project)}
-              className="cursor-pointer group h-[440px]"
-            >
-              <SpotlightCard className="h-full flex flex-col justify-between overflow-hidden relative border-theme-border group-hover:border-brand-primary/40 group-hover:shadow-2xl group-hover:shadow-brand-primary/20 transition-all duration-500">
-                
-                {/* Background Image Container */}
-                <div className="absolute inset-0 z-0 overflow-hidden">
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="w-full h-full object-cover opacity-35 group-hover:opacity-55 group-hover:scale-105 transition-all duration-700 ease-out"
-                    referrerPolicy="no-referrer"
+        {/* Filter Tabs */}
+        <div className="flex flex-wrap items-center gap-2 mb-12">
+          {filterTabs.map((tab) => {
+            const isActive = activeFilter === tab.id;
+            return (
+              <button
+                key={tab.id}
+                onClick={() => {
+                  setActiveFilter(tab.id);
+                  const first = filteredProjects[0];
+                  if (first) setHoveredProject(first);
+                }}
+                className="relative px-4 py-2 rounded-full text-xs font-mono uppercase tracking-wider transition-colors cursor-pointer"
+              >
+                {isActive && (
+                  <motion.div
+                    layoutId="active-project-tab"
+                    className="absolute inset-0 rounded-full bg-brand-primary/20 border border-brand-primary/50"
+                    transition={{ type: 'spring', stiffness: 400, damping: 30 }}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-theme-bg via-theme-bg/60 to-transparent" />
-                </div>
+                )}
+                <span className={`relative z-10 font-semibold ${isActive ? 'text-brand-primary' : 'text-white/50 hover:text-white'}`}>
+                  {tab.label}
+                </span>
+              </button>
+            );
+          })}
+        </div>
 
-                {/* Top Bar on Card */}
-                <div className="relative z-20 p-6 flex items-center justify-between">
-                  <span className="font-mono text-[11px] font-semibold px-3 py-1 rounded-full bg-theme-bg/80 backdrop-blur-md border border-brand-primary/30 text-brand-secondary uppercase tracking-wider">
-                    {project.vibe}
-                  </span>
+        {/* VIEW 1: Codecuy-Style Interactive Chapter Switcher */}
+        {viewMode === 'chapters' ? (
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+            
+            {/* Left Sticky Preview Window */}
+            <div className="lg:col-span-5 lg:sticky lg:top-28">
+              <motion.div
+                key={hoveredProject.id}
+                initial={{ opacity: 0, scale: 0.98 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                className="rounded-3xl overflow-hidden bg-[#141416] border border-white/10 shadow-2xl p-4 flex flex-col group"
+              >
+                <div className="relative aspect-video rounded-2xl overflow-hidden bg-black/60 mb-5">
+                  <img
+                    src={hoveredProject.image}
+                    alt={hoveredProject.title}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
                   
-                  {project.link && (
-                    <a
-                      href={project.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={(e) => e.stopPropagation()}
-                      className="w-8 h-8 rounded-full bg-theme-bg/80 backdrop-blur-md border border-theme-border flex items-center justify-center text-theme-muted hover:text-brand-primary hover:border-brand-primary/50 transition-colors"
-                      title="Open Repository"
-                    >
-                      <FolderGit2 className="w-4 h-4" />
-                    </a>
-                  )}
+                  <div className="absolute top-3 left-3">
+                    <span className="px-3 py-1 rounded-full text-[10px] font-mono uppercase tracking-widest bg-brand-primary text-black font-bold">
+                      {hoveredProject.vibe}
+                    </span>
+                  </div>
                 </div>
 
-                {/* Bottom Content on Card */}
-                <div className="relative z-20 p-6">
-                  {/* Tag Pills */}
-                  <div className="flex flex-wrap gap-1.5 mb-3">
-                    {project.tags.slice(0, 3).map((tag) => (
+                <div className="px-2 pb-2">
+                  <h3 className="font-editorial text-2xl sm:text-3xl font-black text-white uppercase tracking-tight mb-2">
+                    {hoveredProject.title}
+                  </h3>
+                  <p className="text-white/70 text-xs sm:text-sm leading-relaxed mb-4 line-clamp-2">
+                    {hoveredProject.description}
+                  </p>
+
+                  <div className="flex flex-wrap gap-1.5 mb-6">
+                    {hoveredProject.tags.map((tag) => (
                       <span
                         key={tag}
-                        className="text-[10px] font-mono uppercase bg-theme-bg/70 backdrop-blur-sm px-2.5 py-0.5 rounded-md text-theme-dim border border-theme-border/60"
+                        className="px-2.5 py-1 rounded-lg text-[11px] font-mono bg-white/5 border border-white/10 text-white/80"
                       >
                         {tag}
                       </span>
                     ))}
                   </div>
 
-                  <h3 className="text-2xl font-display font-bold mb-2 group-hover:text-brand-primary transition-colors text-theme-text">
-                    {project.title}
-                  </h3>
-                  
-                  <p className="text-theme-dim text-xs leading-relaxed line-clamp-2 mb-4 font-normal">
-                    {project.description}
-                  </p>
-
-                  <div className="flex items-center justify-between pt-3 border-t border-theme-border/50 text-xs font-mono text-brand-primary">
-                    <span className="inline-flex items-center gap-1.5 font-medium group-hover:translate-x-1 transition-transform">
-                      <span>Explore Case Study</span>
-                      <ExternalLink className="w-3.5 h-3.5" />
-                    </span>
-                    <span className="text-[10px] uppercase text-theme-muted font-normal">
-                      Click to expand
-                    </span>
-                  </div>
+                  <button
+                    onClick={() => setSelectedProject(hoveredProject)}
+                    className="w-full py-3 rounded-xl bg-brand-primary hover:bg-blue-600 text-white font-mono text-xs uppercase tracking-wider font-bold transition-all duration-300 flex items-center justify-center gap-2 shadow-lg shadow-brand-primary/20 cursor-pointer"
+                  >
+                    <span>Explore Case Study</span>
+                    <ArrowUpRight className="w-4 h-4" />
+                  </button>
                 </div>
-              </SpotlightCard>
-            </motion.div>
-          ))}
-        </AnimatePresence>
-      </motion.div>
+              </motion.div>
+            </div>
+
+            {/* Right Interactive List */}
+            <div className="lg:col-span-7 flex flex-col divide-y divide-white/10">
+              {filteredProjects.map((project, idx) => {
+                const isHovered = hoveredProject.id === project.id;
+                const formattedNum = String(idx + 1).padStart(2, '0');
+
+                return (
+                  <div
+                    key={project.id}
+                    onMouseEnter={() => setHoveredProject(project)}
+                    onClick={() => setSelectedProject(project)}
+                    className={`py-8 sm:py-10 px-4 sm:px-6 -mx-4 sm:-mx-6 rounded-2xl transition-all duration-300 cursor-pointer flex items-center justify-between group ${
+                      isHovered ? 'bg-[#18181b]' : 'hover:bg-[#141416]/60'
+                    }`}
+                  >
+                    <div className="flex items-start sm:items-center gap-5 sm:gap-8">
+                      <span className={`font-editorial text-3xl sm:text-4xl font-black transition-colors ${
+                        isHovered ? 'text-brand-primary' : 'text-white/20 group-hover:text-white/40'
+                      }`}>
+                        {formattedNum}
+                      </span>
+
+                      <div>
+                        <div className="flex items-center gap-2 mb-1">
+                          <span className="font-mono text-[10px] uppercase tracking-wider text-brand-secondary">
+                            {project.category}
+                          </span>
+                        </div>
+                        <h4 className="font-editorial text-xl sm:text-2xl md:text-3xl font-black uppercase tracking-tight text-white group-hover:text-brand-primary transition-colors">
+                          {project.title}
+                        </h4>
+                        <div className="hidden sm:flex flex-wrap gap-2 mt-2">
+                          {project.tags.slice(0, 3).map((t) => (
+                            <span key={t} className="text-[10px] font-mono text-white/50">
+                              #{t}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className={`w-10 h-10 rounded-full border flex items-center justify-center shrink-0 transition-all ${
+                      isHovered ? 'bg-brand-primary border-brand-primary text-white scale-110' : 'border-white/15 text-white/40 group-hover:border-white/40 group-hover:text-white'
+                    }`}>
+                      <ArrowUpRight className="w-4 h-4" />
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        ) : (
+          /* VIEW 2: Bento Grid View */
+          <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <AnimatePresence>
+              {filteredProjects.map((project, idx) => (
+                <motion.div
+                  key={project.id}
+                  layout
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  transition={{ duration: 0.4, delay: idx * 0.05 }}
+                  onClick={() => setSelectedProject(project)}
+                  className="cursor-pointer group h-[440px]"
+                >
+                  <SpotlightCard className="h-full flex flex-col justify-between overflow-hidden relative border-white/10 group-hover:border-brand-primary/40 group-hover:shadow-2xl group-hover:shadow-brand-primary/20 transition-all duration-500 rounded-3xl bg-[#141416]">
+                    
+                    {/* Background Image Container */}
+                    <div className="absolute inset-0 z-0 overflow-hidden">
+                      <img
+                        src={project.image}
+                        alt={project.title}
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-30 group-hover:opacity-40"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#141416] via-[#141416]/85 to-transparent" />
+                    </div>
+
+                    {/* Top Content */}
+                    <div className="relative z-10 p-6 flex items-start justify-between">
+                      <span className="px-3 py-1 rounded-full text-[10px] font-mono uppercase tracking-widest bg-brand-primary/20 border border-brand-primary/30 text-brand-primary font-bold">
+                        {project.vibe}
+                      </span>
+                      <div className="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/60 group-hover:text-brand-primary group-hover:scale-110 transition-all">
+                        <FolderGit2 className="w-4 h-4" />
+                      </div>
+                    </div>
+
+                    {/* Bottom Details */}
+                    <div className="relative z-10 p-6 pt-0">
+                      <div className="flex flex-wrap gap-1.5 mb-3">
+                        {project.tags.map((tag) => (
+                          <span
+                            key={tag}
+                            className="text-[10px] font-mono px-2 py-0.5 rounded bg-white/5 border border-white/10 text-white/70"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+
+                      <h3 className="font-editorial text-2xl font-black uppercase tracking-tight text-white mb-2 group-hover:text-brand-primary transition-colors">
+                        {project.title}
+                      </h3>
+                      
+                      <p className="text-white/65 text-xs leading-relaxed line-clamp-2 mb-4 font-normal">
+                        {project.description}
+                      </p>
+
+                      <div className="flex items-center justify-between pt-3 border-t border-white/10 text-xs font-mono text-brand-primary">
+                        <span className="inline-flex items-center gap-1.5 font-medium group-hover:translate-x-1 transition-transform">
+                          <span>Explore Case Study</span>
+                          <ArrowUpRight className="w-3.5 h-3.5" />
+                        </span>
+                        <span className="text-[10px] uppercase text-white/40 font-normal">
+                          Click to expand
+                        </span>
+                      </div>
+                    </div>
+                  </SpotlightCard>
+                </motion.div>
+              ))}
+            </AnimatePresence>
+          </motion.div>
+        )}
+      </div>
 
       {/* Case Study Modal */}
       <AnimatePresence>
         {selectedProject && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-8">
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-8" role="dialog" aria-modal="true">
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setSelectedProject(null)}
-              className="absolute inset-0 bg-theme-bg/90 backdrop-blur-xl"
+              className="absolute inset-0 bg-black/90 backdrop-blur-xl"
             />
 
             <motion.div
@@ -231,11 +370,11 @@ export default function ProjectGrid() {
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
               transition={{ type: 'spring', stiffness: 350, damping: 30 }}
-              className="relative w-full max-w-4xl max-h-[90vh] bg-theme-surface/95 backdrop-blur-2xl rounded-3xl overflow-hidden overflow-y-auto border border-theme-border shadow-2xl z-10"
+              className="relative w-full max-w-4xl max-h-[90vh] bg-[#141416] rounded-3xl overflow-hidden overflow-y-auto border border-white/15 shadow-2xl z-10 text-white"
             >
               <button
                 onClick={() => setSelectedProject(null)}
-                className="absolute top-5 right-5 p-2.5 rounded-full bg-theme-bg/80 border border-theme-border hover:border-brand-primary/40 transition-colors z-20 text-theme-text cursor-pointer"
+                className="absolute top-5 right-5 p-2.5 rounded-full bg-black/80 border border-white/15 hover:border-brand-primary/40 transition-colors z-20 text-white cursor-pointer"
                 aria-label="Close modal"
               >
                 <X className="w-5 h-5" />
@@ -243,14 +382,13 @@ export default function ProjectGrid() {
 
               <div className="grid grid-cols-1 md:grid-cols-2">
                 {/* Image Section */}
-                <div className="relative h-64 md:h-full min-h-[300px]">
+                <div className="relative h-64 md:h-full min-h-[320px]">
                   <img
                     src={selectedProject.image}
                     alt={selectedProject.title}
                     className="w-full h-full object-cover"
-                    referrerPolicy="no-referrer"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-transparent via-transparent to-theme-surface/95" />
+                  <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-transparent via-transparent to-[#141416]" />
                 </div>
 
                 {/* Details Section */}
@@ -260,11 +398,11 @@ export default function ProjectGrid() {
                       <span>{selectedProject.vibe}</span>
                     </div>
 
-                    <h2 className="text-3xl md:text-4xl font-display font-bold mb-3 text-theme-text">
+                    <h2 className="text-3xl md:text-4xl font-editorial font-black uppercase tracking-tight mb-3 text-white">
                       {selectedProject.title}
                     </h2>
                     
-                    <p className="text-sm text-theme-dim mb-8 leading-relaxed font-normal">
+                    <p className="text-sm text-white/70 mb-8 leading-relaxed font-normal">
                       {selectedProject.description}
                     </p>
 
@@ -297,7 +435,7 @@ export default function ProjectGrid() {
                           {selectedProject.details.tech.map((t) => (
                             <span
                               key={t}
-                              className="text-[11px] font-mono text-theme-text bg-theme-bg/60 border border-theme-border px-2.5 py-1 rounded"
+                              className="text-[11px] font-mono text-white bg-black/60 border border-white/10 px-2.5 py-1 rounded"
                             >
                               {t}
                             </span>
@@ -311,7 +449,7 @@ export default function ProjectGrid() {
                         isOpen={openSection === 'impact'}
                         onToggle={() => setOpenSection(openSection === 'impact' ? null : 'impact')}
                       >
-                        <p className="text-theme-text font-medium leading-relaxed">
+                        <p className="text-white font-medium leading-relaxed">
                           {selectedProject.details.impact}
                         </p>
                       </Collapsible>
@@ -319,12 +457,12 @@ export default function ProjectGrid() {
                   </div>
 
                   {selectedProject.link && (
-                    <div className="mt-8 pt-6 border-t border-theme-border">
+                    <div className="mt-8 pt-6 border-t border-white/10">
                       <a
                         href={selectedProject.link}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="w-full bg-brand-primary text-black font-semibold py-3.5 rounded-xl hover:bg-brand-secondary transition-colors flex items-center justify-center gap-2 text-sm tracking-wide shadow-lg shadow-brand-primary/20"
+                        className="w-full bg-brand-primary text-white font-semibold py-3.5 rounded-xl hover:bg-blue-600 transition-colors flex items-center justify-center gap-2 text-sm tracking-wide shadow-lg shadow-brand-primary/20"
                       >
                         <span>View Repository / Code</span>
                         <ExternalLink className="w-4 h-4" />

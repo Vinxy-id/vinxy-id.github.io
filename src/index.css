@@ -1,15 +1,27 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,800;1,900&family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
 @import "tailwindcss";
 
 @theme {
   --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-display: "Space Grotesk", sans-serif;
+  --font-editorial: "Kanit", sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
 
   --color-brand-primary: #3B82F6;
   --color-brand-secondary: #60A5FA;
   --color-brand-accent: #1D4ED8;
   --color-brand-emerald: #10B981;
+
+  --color-ink: #0c0c0c;
+  --color-ink-soft: #141416;
+  --color-ink-card: #18181b;
+  --color-paper: #ece7dd;
+  --color-paper-ink: #1a1714;
+  --color-paper-muted: rgba(26, 23, 20, 0.65);
+  --color-paper-border: rgba(26, 23, 20, 0.12);
+  --color-ember: #ff5a1f;
+  --color-ember-glow: rgba(255, 90, 31, 0.35);
+  --color-mist: #d7e2ea;
   
   --color-theme-bg: var(--bg-color);
   --color-theme-surface: var(--surface-color);
@@ -21,14 +33,14 @@
 }
 
 :root {
-  --bg-color: #030712;
-  --surface-color: #0b0f19;
+  --bg-color: #0c0c0c;
+  --surface-color: #141416;
   --text-color: #f9fafb;
-  --text-muted: rgba(249, 250, 251, 0.45);
-  --text-dim: rgba(249, 250, 251, 0.75);
+  --text-muted: rgba(249, 250, 251, 0.48);
+  --text-dim: rgba(249, 250, 251, 0.78);
   --border-color: rgba(255, 255, 255, 0.08);
-  --panel-bg: rgba(17, 24, 39, 0.5);
-  --glass-bg: rgba(3, 7, 18, 0.65);
+  --panel-bg: rgba(20, 20, 22, 0.7);
+  --glass-bg: rgba(12, 12, 12, 0.75);
   --gradient-start: #ffffff;
 
   background-color: var(--bg-color);
@@ -39,13 +51,13 @@
 :root[data-theme='light'] {
   --bg-color: #f8fafc;
   --surface-color: #ffffff;
-  --text-color: #090d16;
+  --text-color: #0c0c0c;
   --text-muted: rgba(15, 23, 42, 0.55);
   --text-dim: rgba(15, 23, 42, 0.75);
   --border-color: rgba(0, 0, 0, 0.08);
-  --panel-bg: rgba(255, 255, 255, 0.75);
-  --glass-bg: rgba(248, 250, 252, 0.85);
-  --gradient-start: #090d16;
+  --panel-bg: rgba(255, 255, 255, 0.85);
+  --glass-bg: rgba(248, 250, 252, 0.9);
+  --gradient-start: #0c0c0c;
   color-scheme: light;
 }
 
@@ -110,8 +122,27 @@ body {
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.12);
 }
 
+/* Metallic & Silver Gradients */
+.text-silver {
+  background: linear-gradient(180deg, #ffffff 10%, #a1a1aa 60%, #71717a 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+:root[data-theme='light'] .text-silver {
+  background: linear-gradient(180deg, #18181b 0%, #3f3f46 60%, #71717a 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 .text-gradient {
   background: linear-gradient(135deg, var(--gradient-start) 10%, #60A5FA 70%, #93C5FD 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-ember-gradient {
+  background: linear-gradient(135deg, #ffffff 15%, #ff5a1f 70%, #ea580c 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -120,8 +151,12 @@ body {
   box-shadow: 0 0 35px -5px rgba(59, 130, 246, 0.35);
 }
 
+.glow-ember {
+  box-shadow: 0 0 30px -5px rgba(255, 90, 31, 0.45);
+}
+
 .shimmer-btn {
-  background-image: linear-gradient(110deg, #3B82F6 45%, #93C5FD 55%, #3B82F6);
+  background-image: linear-gradient(110deg, #ff5a1f 40%, #fdba74 50%, #ff5a1f 60%);
   background-size: 200% 100%;
   animation: shimmer 3s infinite;
 }
@@ -133,4 +168,40 @@ body {
   100% {
     background-position: -200% 0;
   }
+}
+
+/* Infinite Marquee Animation */
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes marquee-reverse {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 35s linear infinite;
+}
+
+.animate-marquee-reverse {
+  display: flex;
+  width: max-content;
+  animation: marquee-reverse 35s linear infinite;
+}
+
+.pause-hover:hover .animate-marquee,
+.pause-hover:hover .animate-marquee-reverse {
+  animation-play-state: paused;
 }
