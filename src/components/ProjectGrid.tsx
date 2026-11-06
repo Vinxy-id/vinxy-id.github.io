@@ -303,7 +303,8 @@ function StickyProjectCard({
                 <img
                   src={project.col1[0]}
                   alt={project.name}
-                  loading="lazy"
+                  loading="eager"
+                  decoding="async"
                   className="w-full h-full object-cover transition-transform duration-500 group-hover/mockup:scale-[1.03]"
                   style={{ height: 'clamp(130px, 14vw, 200px)' }}
                 />
@@ -312,7 +313,8 @@ function StickyProjectCard({
                 <img
                   src={project.col1[1]}
                   alt={project.name}
-                  loading="lazy"
+                  loading="eager"
+                  decoding="async"
                   className="w-full h-full object-cover transition-transform duration-500 group-hover/mockup:scale-[1.03]"
                   style={{ height: 'clamp(140px, 17vw, 250px)' }}
                 />
@@ -324,7 +326,8 @@ function StickyProjectCard({
               <img
                 src={project.col2}
                 alt={project.name}
-                loading="lazy"
+                loading="eager"
+                decoding="async"
                 className="w-full h-full object-cover transition-transform duration-500 group-hover/mockup:scale-[1.02]"
                 style={{ maxHeight: '460px', minHeight: 'clamp(200px, 32vw, 460px)' }}
               />
