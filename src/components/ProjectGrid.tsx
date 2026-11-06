@@ -119,18 +119,19 @@ const STICKY_PROJECTS = [
   {
     number: '04',
     id: 'ecokiln',
-    name: 'EcoKiln Venturi Tiudan',
+    name: 'EcoKiln Venturi 3D SCADA',
     category: 'Digital Twin & CleanTech',
     year: '2026',
-    tags: ['Digital Twin 3D', 'IoT Telemetry', 'CleanTech', 'LKTIN 2026'],
+    tags: ['Three.js 3D', 'IoT Telemetry', 'CleanTech', 'LKTIN 2026'],
     col1: [
-      './assets/projects/ecokiln-portal.png',
-      './assets/projects/ecokiln-dashboard.png',
+      './assets/projects/ecokiln-live-3d.png',
+      './assets/projects/ecokiln-live-portal.png',
     ],
-    col2: './assets/projects/ecokiln-3d-exploded.png',
+    col2: './assets/projects/ecokiln-live-hero.png',
     projectRef: PROJECTS.find((p) => p.id === 'ecokiln') || PROJECTS[1],
-    liveUrl: 'https://github.com/Vinxy-id',
-    isLive: false,
+    liveUrl: 'https://eco-kiln-web3d.vercel.app',
+    isLive: true,
+    liveLabel: '3D SCADA',
   },
   {
     number: '05',
@@ -140,29 +141,31 @@ const STICKY_PROJECTS = [
     year: '2026',
     tags: ['React 19', 'Leaflet Web-GIS', 'PostGIS', 'Smart Contract'],
     col1: [
-      './assets/projects/si-mukti.jpeg',
-      './assets/projects/ecokiln-portal.png',
+      './assets/projects/simukti-live-hero.png',
+      './assets/projects/simukti-live-dashboard.png',
     ],
-    col2: './assets/projects/si-mukti.jpeg',
+    col2: './assets/projects/simukti-live-map.png',
     projectRef: PROJECTS.find((p) => p.id === 'si-mukti') || PROJECTS[2],
-    liveUrl: 'https://github.com/Vinxy-id/si-mukti',
-    isLive: false,
+    liveUrl: 'https://si-mukti.vercel.app',
+    isLive: true,
+    liveLabel: 'GIS Web',
   },
   {
     number: '06',
     id: 'pantrix',
-    name: 'PANTRIX Smart Assistant',
+    name: 'PANTRIX Smart Kitchen Assistant',
     category: 'Winner Juara 2 CVC II',
     year: '2025',
-    tags: ['Flutter', 'Dart', 'Gamification', 'Mobile UX'],
+    tags: ['Flutter', 'Dart', 'Gamification', 'Live Web Demo'],
     col1: [
-      './assets/projects/pantrix-bcm.png',
-      './assets/projects/pantrix-roadmap.png',
+      './assets/projects/pantrix-live-mobile.png',
+      './assets/projects/pantrix-live-features.png',
     ],
-    col2: './assets/projects/pantrix-prototype.png',
+    col2: './assets/projects/pantrix-live-hero.png',
     projectRef: PROJECTS.find((p) => p.id === 'pantrix') || PROJECTS[3],
-    liveUrl: 'https://github.com/Vinxy-id/Pantrix',
-    isLive: false,
+    liveUrl: 'https://vinxy-id.github.io/Pantrix/',
+    isLive: true,
+    liveLabel: 'Demo',
   },
 ];
 
@@ -204,10 +207,10 @@ function StickyProjectCard({
           top: `${index * 22}px`,
           transformOrigin: 'top center',
         }}
-        className={`relative w-full max-w-6xl ${round} border border-mist/15 p-5 sm:p-7 md:p-9 shadow-[0_-25px_60px_-25px_rgba(0,0,0,0.9)] bg-ink-soft`}
+        className={`relative w-full max-w-6xl ${round} border border-mist/15 p-5 sm:p-7 md:p-8 shadow-[0_-25px_60px_-25px_rgba(0,0,0,0.9)] bg-ink-soft`}
       >
         {/* Header row */}
-        <div className="flex items-center justify-between gap-4 flex-wrap mb-5 sm:mb-7">
+        <div className="flex items-center justify-between gap-4 flex-wrap mb-4 sm:mb-6">
           <div className="flex items-center gap-4 sm:gap-6 md:gap-8">
             <span
               className="text-mist/25 font-black leading-none select-none font-editorial"
@@ -216,13 +219,13 @@ function StickyProjectCard({
               {project.number}
             </span>
             <div className="flex flex-col gap-1 sm:gap-1.5">
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 flex-wrap">
                 <span className="text-ember font-medium uppercase tracking-[0.25em] text-xs sm:text-sm font-mono">
                   {project.category} &bull; {project.year}
                 </span>
                 {project.isLive && (
-                  <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-[9px] font-mono uppercase tracking-widest">
-                    <span className="w-1 h-1 rounded-full bg-emerald-400 animate-pulse" />
+                  <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-[10px] font-mono uppercase tracking-widest">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
                     Live {project.liveLabel || 'Web'}
                   </span>
                 )}
@@ -268,41 +271,72 @@ function StickyProjectCard({
           </div>
         </div>
 
-        {/* 2-Column Photo Collage (Codecuy Style) */}
-        <div
-          className="flex flex-col md:flex-row gap-3 sm:gap-4 md:gap-5 cursor-pointer"
-          onClick={() => onSelect(project.projectRef)}
+        {/* Browser Mockup Frame with Direct Live Link (User Request) */}
+        <a
+          href={project.liveUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group/mockup block relative overflow-hidden rounded-[20px] sm:rounded-[26px] md:rounded-[30px] border border-mist/20 bg-black/60 shadow-2xl transition-all duration-300 hover:border-ember/60 hover:shadow-[0_10px_40px_rgba(255,90,31,0.25)] cursor-pointer"
+          title={`Buka live preview ${project.name} langsung di tab baru`}
         >
-          {/* Left Column (40% width) - 2 Stacked Images */}
-          <div className="flex flex-row md:flex-col gap-3 sm:gap-4 md:gap-5 w-full md:w-[40%]">
-            <img
-              src={project.col1[0]}
-              alt={project.name}
-              loading="lazy"
-              className={`w-1/2 md:w-full object-cover ${round} transition-transform duration-500 hover:scale-[1.02] border border-mist/10`}
-              style={{ height: 'clamp(140px, 15vw, 210px)' }}
-            />
-            <img
-              src={project.col1[1]}
-              alt={project.name}
-              loading="lazy"
-              className={`w-1/2 md:w-full object-cover ${round} transition-transform duration-500 hover:scale-[1.02] border border-mist/10`}
-              style={{ height: 'clamp(150px, 18vw, 260px)' }}
-            />
+          {/* Mac-Style Window Chrome Bar with Live Domain */}
+          <div className="flex items-center justify-between px-4 py-2 sm:py-2.5 bg-[#101014] border-b border-mist/15 text-[11px] font-mono">
+            <div className="flex items-center gap-1.5 sm:gap-2">
+              <span className="w-2.5 h-2.5 rounded-full bg-rose-500/80 inline-block" />
+              <span className="w-2.5 h-2.5 rounded-full bg-amber-500/80 inline-block" />
+              <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/80 inline-block" />
+              <span className="ml-2 text-mist/60 truncate max-w-[180px] sm:max-w-xs md:max-w-md">
+                {project.liveUrl.replace(/^https?:\/\//, '')}
+              </span>
+            </div>
+            <div className="flex items-center gap-1 text-[10px] uppercase tracking-widest text-ember group-hover/mockup:translate-x-0.5 transition-transform font-bold">
+              <span>Buka Web Asli</span>
+              <ArrowUpRight className="w-3.5 h-3.5" />
+            </div>
           </div>
 
-          {/* Right Column (60% width) - 1 Large Hero Image */}
-          <div className="relative w-full md:w-[60%] min-h-[220px] md:min-h-[auto] bg-black/40 rounded-[30px] sm:rounded-[40px] md:rounded-[50px] overflow-hidden flex items-center justify-center border border-mist/10 group">
-            <img
-              src={project.col2}
-              alt={project.name}
-              loading="lazy"
-              className={`w-full h-full ${project.id === 'pantrix' ? 'object-contain p-4' : 'object-cover'} ${round} transition-transform duration-500 group-hover:scale-[1.02]`}
-              style={{ maxHeight: '480px', minHeight: 'clamp(220px, 34vw, 480px)' }}
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none rounded-[30px] sm:rounded-[40px] md:rounded-[50px]" />
+          {/* 2-Column Photo Collage Inside Mockup Frame */}
+          <div className="flex flex-col md:flex-row gap-3 sm:gap-4 md:gap-5 p-2.5 sm:p-3.5 bg-black/30">
+            {/* Left Column (40% width) - 2 Stacked Images */}
+            <div className="flex flex-row md:flex-col gap-3 sm:gap-4 md:gap-5 w-full md:w-[40%]">
+              <div className="relative w-1/2 md:w-full overflow-hidden rounded-[14px] sm:rounded-[18px] border border-mist/10">
+                <img
+                  src={project.col1[0]}
+                  alt={project.name}
+                  loading="lazy"
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover/mockup:scale-[1.03]"
+                  style={{ height: 'clamp(130px, 14vw, 200px)' }}
+                />
+              </div>
+              <div className="relative w-1/2 md:w-full overflow-hidden rounded-[14px] sm:rounded-[18px] border border-mist/10">
+                <img
+                  src={project.col1[1]}
+                  alt={project.name}
+                  loading="lazy"
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover/mockup:scale-[1.03]"
+                  style={{ height: 'clamp(140px, 17vw, 250px)' }}
+                />
+              </div>
+            </div>
+
+            {/* Right Column (60% width) - 1 Large Hero Image */}
+            <div className="relative w-full md:w-[60%] min-h-[200px] md:min-h-[auto] bg-black/50 rounded-[14px] sm:rounded-[18px] overflow-hidden flex items-center justify-center border border-mist/10 group">
+              <img
+                src={project.col2}
+                alt={project.name}
+                loading="lazy"
+                className="w-full h-full object-cover transition-transform duration-500 group-hover/mockup:scale-[1.02]"
+                style={{ maxHeight: '460px', minHeight: 'clamp(200px, 32vw, 460px)' }}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
+              <div className="absolute bottom-3 right-3 sm:bottom-4 sm:right-4 px-3 py-1.5 rounded-full bg-black/80 backdrop-blur-md border border-white/20 text-[10px] font-mono uppercase tracking-widest text-white/90 flex items-center gap-1.5 shadow-lg">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                <span>Live Preview</span>
+                <ArrowUpRight className="w-3 h-3 text-ember" />
+              </div>
+            </div>
           </div>
-        </div>
+        </a>
       </motion.div>
     </div>
   );

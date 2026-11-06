@@ -28,14 +28,14 @@ export const PROJECTS: Project[] = [
     description: 'Digital Twin 3D CAD & Smart CleanTech IoT system reducing pottery kiln particulate emissions with real-time DLH geospatial monitoring.',
     category: 'Digital Twin & CleanTech',
     tags: ['Digital Twin 3D', 'IoT Telemetry', 'CleanTech', 'LKTIN 2026'],
-    image: './assets/projects/ecokiln-3d-exploded.png',
-    link: 'https://github.com/Vinxy-id',
+    image: './assets/projects/ecokiln-live-hero.png',
+    link: 'https://eco-kiln-web3d.vercel.app',
     vibe: 'Environmental Precision',
     details: {
       problem: 'Traditional wood-fired pottery kilns in Tiudan, Tulungagung produce heavy particulate emissions (PM2.5/PM10) that exceed national ambient air standards and degrade local air quality.',
       solution: 'Developed an innovative eco-kiln integrated with a Venturi wet scrubber, a 3D Digital Twin exploded CAD assembly, and a real-time DLH geospatial emission telemetry dashboard.',
       impact: 'Authored for LKTIN Bamedan 2026; validated 65%+ particulate reduction efficiency and automated real-time emission compliance for traditional artisans.',
-      tech: ['Autodesk CAD 3D', 'Digital Twin', 'IoT ESP32', 'React GIS', 'Tailwind CSS'],
+      tech: ['Three.js 3D', 'Digital Twin', 'IoT ESP32', 'React SCADA', 'Tailwind CSS'],
     }
   },
   {
@@ -44,8 +44,8 @@ export const PROJECTS: Project[] = [
     description: 'Integrated multi-stakeholder supply chain platform with Web-GIS mapping, volumetric AI analysis, and smart contracts for quarry minerals.',
     category: 'Spatial Logistics & Web-GIS',
     tags: ['Leaflet Web-GIS', 'PostGIS', 'Smart Contract', 'QR Manifest'],
-    image: './assets/projects/si-mukti.jpeg',
-    link: 'https://github.com/Vinxy-id/si-mukti',
+    image: './assets/projects/simukti-live-map.png',
+    link: 'https://si-mukti.vercel.app',
     vibe: 'Geospatial & Traceability',
     details: {
       problem: 'In the Kebumen & Tulungagung traditional tile and marble industries, supply chain transactions were opaque, quality control lacked digital certification, and logistics tracking was entirely manual.',
@@ -60,14 +60,14 @@ export const PROJECTS: Project[] = [
     description: 'Winner (Juara 2) Creative Visual Competition II. Gamified kitchen inventory management and procedural recipe assistant with expiry alert pipelines.',
     category: 'Winner CVC II & Mobile UX',
     tags: ['Flutter', 'Mobile UX', 'Gamification', 'Winner CVC II'],
-    image: './assets/projects/pantrix-prototype.png',
-    link: 'https://github.com/Vinxy-id/Pantrix',
+    image: './assets/projects/pantrix-live-hero.png',
+    link: 'https://vinxy-id.github.io/Pantrix/',
     vibe: 'Gamified Utility',
     details: {
       problem: 'Household food waste accounts for substantial financial loss, while standard grocery and meal tracking apps suffer from tedious manual data entry, clinical interfaces, and quick user drop-off.',
-      solution: 'Engineered a high-fidelity interaction system using Flutter featuring dynamic pantry gamification, expiry alert pipelines, and smart recipe generation.',
+      solution: 'Engineered a high-fidelity interaction system featuring dynamic pantry gamification, expiry alert pipelines, and smart recipe generation with a live interactive web app.',
       impact: 'Won 2nd Place (Juara 2) in Creative Visual Competition II for innovative UI/UX architecture and fluid interaction design.',
-      tech: ['Flutter', 'Dart', 'Figma', 'Provider', 'Mobile UX Design'],
+      tech: ['Flutter', 'Dart', 'HTML5/CSS3', 'Figma', 'Mobile UX Design'],
     }
   },
   {
