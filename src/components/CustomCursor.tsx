@@ -16,6 +16,11 @@ export default function CustomCursor() {
   const cursorY = useSpring(0, springConfig);
 
   useEffect(() => {
+    // Only run on non-touch desktop devices
+    if (typeof window !== 'undefined' && window.matchMedia('(pointer: coarse)').matches) {
+      return;
+    }
+
     const handleMouseMove = (e: MouseEvent) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
       cursorX.set(e.clientX - 16);
@@ -41,8 +46,8 @@ export default function CustomCursor() {
     const handleMouseLeave = () => setIsVisible(false);
     const handleMouseEnter = () => setIsVisible(true);
 
-    window.addEventListener('mousemove', handleMouseMove);
-    window.addEventListener('mouseover', handleMouseOver);
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
+    window.addEventListener('mouseover', handleMouseOver, { passive: true });
     document.addEventListener('mouseleave', handleMouseLeave);
     document.addEventListener('mouseenter', handleMouseEnter);
 
@@ -60,21 +65,21 @@ export default function CustomCursor() {
     <div className="fixed inset-0 pointer-events-none z-[9999] hidden lg:block">
       {/* Main Cursor Circle */}
       <motion.div
-        className="fixed w-8 h-8 rounded-full border border-brand-primary/50 mix-blend-difference"
+        className="fixed w-8 h-8 rounded-full border border-ember/60 mix-blend-difference"
         style={{
           x: cursorX,
           y: cursorY,
         }}
         animate={{
           scale: isHovering ? 2.5 : 1,
-          backgroundColor: isHovering ? 'rgba(59, 130, 246, 0.1)' : 'rgba(59, 130, 246, 0)',
+          backgroundColor: isHovering ? 'rgba(255, 90, 31, 0.15)' : 'rgba(255, 90, 31, 0)',
         }}
         transition={{ type: 'spring', damping: 20, stiffness: 150 }}
       />
       
       {/* Small Dot */}
       <motion.div
-        className="fixed w-1.5 h-1.5 bg-brand-primary rounded-full"
+        className="fixed w-1.5 h-1.5 bg-ember rounded-full"
         style={{
           x: mousePosition.x - 3,
           y: mousePosition.y - 3,

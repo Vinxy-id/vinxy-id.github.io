@@ -21,24 +21,23 @@ export default function SectionReveal({
     <motion.div
       initial={{
         opacity: 0,
-        filter: 'blur(8px)',
-        scale: 0.985,
+        y: 18,
       }}
       whileInView={{
         opacity: 1,
-        filter: 'blur(0px)',
-        scale: 1,
+        y: 0,
       }}
       viewport={{
-        once: false, // Animate out when section is scrolled out of view!
-        amount: 0.08,
-        margin: '-60px 0px -60px 0px',
+        once: false,
+        amount: 0.05,
+        margin: '-40px 0px -40px 0px',
       }}
       transition={{
-        duration: 0.75,
+        duration: 0.65,
         delay,
-        ease: [0.16, 1, 0.3, 1], // High-grade spring easing
+        ease: [0.16, 1, 0.3, 1],
       }}
+      style={{ willChange: 'opacity, transform' }}
       className={className}
     >
       {children}

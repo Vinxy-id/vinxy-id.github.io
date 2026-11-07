@@ -199,7 +199,7 @@ function StickyProjectCard({
   });
 
   return (
-    <div className="h-[88vh] md:h-[85vh] sticky top-20 sm:top-24 md:top-28 flex justify-center">
+    <div className="relative md:sticky md:top-24 lg:top-28 h-auto md:h-[85vh] flex justify-center mb-8 md:mb-0">
       <motion.div
         style={{
           scale,
@@ -207,24 +207,24 @@ function StickyProjectCard({
           top: `${index * 22}px`,
           transformOrigin: 'top center',
         }}
-        className={`relative w-full max-w-6xl ${round} border border-mist/15 p-5 sm:p-7 md:p-8 shadow-[var(--card-shadow)] bg-ink-soft transition-colors duration-300`}
+        className={`relative w-full max-w-6xl ${round} border border-mist/15 p-4 sm:p-7 md:p-8 shadow-[var(--card-shadow)] bg-ink-soft transition-colors duration-300`}
       >
         {/* Header row */}
-        <div className="flex items-center justify-between gap-4 flex-wrap mb-4 sm:mb-6">
-          <div className="flex items-center gap-4 sm:gap-6 md:gap-8">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 mb-4 sm:mb-6">
+          <div className="flex items-start sm:items-center gap-3 sm:gap-6 md:gap-8">
             <span
-              className="text-mist/25 font-black leading-none select-none font-editorial"
-              style={{ fontSize: 'clamp(2.8rem, 7vw, 110px)' }}
+              className="text-mist/25 font-black leading-none select-none font-editorial shrink-0"
+              style={{ fontSize: 'clamp(2.4rem, 6vw, 110px)' }}
             >
               {project.number}
             </span>
-            <div className="flex flex-col gap-1 sm:gap-1.5">
+            <div className="flex flex-col gap-1 sm:gap-1.5 min-w-0">
               <div className="flex items-center gap-2 flex-wrap">
-                <span className="text-ember font-medium uppercase tracking-[0.25em] text-xs sm:text-sm font-mono">
+                <span className="text-ember font-medium uppercase tracking-[0.15em] sm:tracking-[0.25em] text-[11px] sm:text-sm font-mono truncate">
                   {project.category} &bull; {project.year}
                 </span>
                 {project.isLive && (
-                  <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-[10px] font-mono uppercase tracking-widest">
+                  <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-[9px] sm:text-[10px] font-mono uppercase tracking-widest whitespace-nowrap">
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
                     Live {project.liveLabel || 'Web'}
                   </span>
@@ -232,7 +232,7 @@ function StickyProjectCard({
               </div>
               <h3
                 className="text-mist font-medium uppercase leading-tight font-editorial"
-                style={{ fontSize: 'clamp(1.2rem, 2.2vw, 2rem)' }}
+                style={{ fontSize: 'clamp(1.15rem, 2.2vw, 2rem)' }}
               >
                 {project.name}
               </h3>
@@ -249,13 +249,13 @@ function StickyProjectCard({
             </div>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2.5 w-full sm:w-auto mt-1 sm:mt-0">
             {project.liveUrl && project.isLive && (
               <a
                 href={project.liveUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 rounded-full bg-ember text-white font-medium uppercase tracking-widest px-4 py-2 sm:px-5 sm:py-2.5 text-xs transition-transform duration-200 hover:scale-105 shadow-md shadow-ember/25"
+                className="flex-1 sm:flex-initial justify-center inline-flex items-center gap-1.5 rounded-full bg-ember text-white font-medium uppercase tracking-widest px-4 py-2 sm:px-5 sm:py-2.5 text-xs transition-transform duration-200 hover:scale-105 shadow-md shadow-ember/25 text-center"
               >
                 <span>Live {project.liveLabel || 'Web'}</span>
                 <ArrowUpRight className="w-3.5 h-3.5" />
@@ -263,9 +263,9 @@ function StickyProjectCard({
             )}
             <button
               onClick={() => onSelect(project.projectRef)}
-              className="group inline-flex items-center gap-2 rounded-full border border-mist/30 text-mist font-medium uppercase tracking-widest px-5 py-2 sm:px-7 sm:py-2.5 text-xs sm:text-sm transition-all duration-300 hover:border-ember hover:text-ember hover:bg-ember/10 cursor-pointer"
+              className="flex-1 sm:flex-initial justify-center group inline-flex items-center gap-2 rounded-full border border-mist/30 text-mist font-medium uppercase tracking-widest px-4 py-2 sm:px-7 sm:py-2.5 text-xs sm:text-sm transition-all duration-300 hover:border-ember hover:text-ember hover:bg-ember/10 cursor-pointer text-center"
             >
-              <span>Explore Case Study</span>
+              <span>Case Study</span>
               <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </button>
           </div>
