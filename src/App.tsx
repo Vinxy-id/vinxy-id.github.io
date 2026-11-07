@@ -64,7 +64,6 @@ export default function App() {
   return (
     <main className="grain bg-ink text-mist selection:bg-ember selection:text-white min-h-screen lg:cursor-none transition-colors duration-300 relative overflow-x-clip font-sans">
       <CustomCursor />
-      <ThemeToggle />
 
       {/* Spring Progress Bar */}
       <motion.div
@@ -73,11 +72,11 @@ export default function App() {
       />
 
       {/* Codecuy-Style Floating Top Navigation Header */}
-      <header className="fixed top-0 left-0 right-0 z-[900] px-6 md:px-12 py-5 bg-ink/80 backdrop-blur-xl border-b border-mist/10 flex items-center justify-between">
+      <header className="fixed top-0 left-0 right-0 z-[900] px-5 sm:px-8 md:px-12 py-4 sm:py-5 bg-ink/80 backdrop-blur-xl border-b border-mist/10 flex items-center justify-between transition-colors duration-300">
         {/* Brand Wordmark */}
         <a
           href="#"
-          className="font-black text-xl tracking-tight text-white flex items-center gap-1 group font-editorial uppercase"
+          className="font-black text-xl tracking-tight text-mist flex items-center gap-1 group font-editorial uppercase transition-colors"
         >
           <span>ALVIN</span>
           <span className="text-ember text-sm font-mono group-hover:rotate-45 transition-transform duration-300">
@@ -86,23 +85,28 @@ export default function App() {
         </a>
 
         {/* Center Pill Badge */}
-        <div className="hidden md:inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-ink-soft border border-mist/15 text-[11px] font-mono uppercase tracking-widest text-mist/80">
+        <div className="hidden lg:inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-ink-soft border border-mist/15 text-[11px] font-mono uppercase tracking-widest text-mist/80 transition-colors">
           <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
           <span>Frontend Developer &bull; Creative Technologist</span>
         </div>
 
-        {/* Right Navigation Links */}
-        <nav className="hidden md:flex items-center gap-6 sm:gap-8 pr-12 md:pr-16">
-          {navLinks.map((item) => (
-            <a
-              key={item.label}
-              href={item.href}
-              className="font-medium text-xs uppercase tracking-widest text-mist/60 hover:text-mist transition-colors"
-            >
-              {item.label}
-            </a>
-          ))}
-        </nav>
+        {/* Right Navigation & Integrated Theme Switcher */}
+        <div className="flex items-center gap-4 sm:gap-6 md:gap-8">
+          <nav className="hidden md:flex items-center gap-6 sm:gap-8">
+            {navLinks.map((item) => (
+              <a
+                key={item.label}
+                href={item.href}
+                className="font-medium text-xs uppercase tracking-widest text-mist/60 hover:text-mist transition-colors font-mono"
+              >
+                {item.label}
+              </a>
+            ))}
+          </nav>
+
+          {/* Editorial Capsule Theme Switcher */}
+          <ThemeToggle />
+        </div>
       </header>
 
       {/* 1. Hero Section (Codecuy Signature Headline & 3D Canvas) */}

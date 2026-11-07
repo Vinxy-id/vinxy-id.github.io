@@ -45,9 +45,9 @@ export default function ThreeCanvas({ className = '' }: ThreeCanvasProps) {
 
     // Check current theme colors
     const isDark = document.documentElement.getAttribute('data-theme') !== 'light';
-    const primaryColor = isDark ? 0x3B82F6 : 0x2563EB;
-    const secondaryColor = isDark ? 0x60A5FA : 0x0284C7;
-    const pointColor = isDark ? 0x93C5FD : 0x1D4ED8;
+    const primaryColor = isDark ? 0xff5a1f : 0xc2410c;
+    const secondaryColor = isDark ? 0xff8a4c : 0xff5a1f;
+    const pointColor = isDark ? 0xffc299 : 0x121316;
 
     // Outer Geodesic Icosahedron Wireframe
     const outerGeo = new THREE.IcosahedronGeometry(1.65, 2);
@@ -55,7 +55,7 @@ export default function ThreeCanvas({ className = '' }: ThreeCanvasProps) {
       color: primaryColor,
       wireframe: true,
       transparent: true,
-      opacity: isDark ? 0.28 : 0.45,
+      opacity: isDark ? 0.32 : 0.45,
     });
     const outerMesh = new THREE.Mesh(outerGeo, outerMat);
     group.add(outerMesh);
@@ -66,7 +66,7 @@ export default function ThreeCanvas({ className = '' }: ThreeCanvasProps) {
       color: secondaryColor,
       wireframe: true,
       transparent: true,
-      opacity: isDark ? 0.6 : 0.75,
+      opacity: isDark ? 0.6 : 0.72,
     });
     const innerMesh = new THREE.Mesh(innerGeo, innerMat);
     group.add(innerMesh);
@@ -106,6 +106,24 @@ export default function ThreeCanvas({ className = '' }: ThreeCanvasProps) {
     const ringMesh = new THREE.Mesh(ringGeo, ringMat);
     ringMesh.rotation.x = Math.PI / 3;
     group.add(ringMesh);
+
+    // Dynamic Theme Listener
+    const updateThemeColors = () => {
+      const darkNow = document.documentElement.getAttribute('data-theme') !== 'light';
+      const pColor = darkNow ? 0xff5a1f : 0xc2410c;
+      const sColor = darkNow ? 0xff8a4c : 0xff5a1f;
+      const ptColor = darkNow ? 0xffc299 : 0x121316;
+
+      outerMat.color.setHex(pColor);
+      outerMat.opacity = darkNow ? 0.32 : 0.45;
+      innerMat.color.setHex(sColor);
+      innerMat.opacity = darkNow ? 0.6 : 0.72;
+      particleMat.color.setHex(ptColor);
+      particleMat.opacity = darkNow ? 0.75 : 0.85;
+      ringMat.color.setHex(sColor);
+    };
+
+    window.addEventListener('themechange', updateThemeColors);
 
     // 3. Mouse & Drag Interaction State
     let mouseX = 0;
@@ -236,6 +254,7 @@ export default function ThreeCanvas({ className = '' }: ThreeCanvasProps) {
     return () => {
       cancelAnimationFrame(animationFrameId);
       observer.disconnect();
+      window.removeEventListener('themechange', updateThemeColors);
 
       window.removeEventListener('mousemove', onMouseMove);
       container.removeEventListener('mousedown', onMouseDown);

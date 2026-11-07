@@ -1,61 +1,78 @@
 @import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,800;1,900&family=JetBrains+Mono:wght@400;500;600&display=swap');
 @import "tailwindcss";
 
+:root {
+  /* Default: Dark Theme (Codecuy Matte Ink & Mist) */
+  --ink: #0c0c0c;
+  --ink-soft: #141416;
+  --ink-card: #18181b;
+  --mist: #d7e2ea;
+  --paper: #ece7dd;
+  --paper-ink: #1a1714;
+  --paper-muted: rgba(26, 23, 20, 0.65);
+  --paper-border: rgba(26, 23, 20, 0.15);
+  --ember: #ff5a1f;
+  --ember-deep: #c2410c;
+  --ember-glow: rgba(255, 90, 31, 0.45);
+
+  --bg-color: #0c0c0c;
+  --surface-color: #141416;
+  --text-color: #d7e2ea;
+  --border-color: rgba(215, 226, 234, 0.12);
+  --header-bg: rgba(12, 12, 12, 0.85);
+  --hero-heading-from: #5a5e66;
+  --hero-heading-to: #e8e2d5;
+  --card-shadow: 0 -25px 60px -25px rgba(0, 0, 0, 0.9);
+
+  color-scheme: dark;
+}
+
+:root[data-theme='light'] {
+  /* Light Theme (Option A Warm Paper & Deep Ink) */
+  --ink: #f6f4ee;
+  --ink-soft: #ffffff;
+  --ink-card: #eae5da;
+  --mist: #121316;
+  --paper: #ece7dd;
+  --paper-ink: #121316;
+  --paper-muted: rgba(18, 19, 22, 0.65);
+  --paper-border: rgba(18, 19, 22, 0.15);
+  --ember: #ff5a1f;
+  --ember-deep: #c2410c;
+  --ember-glow: rgba(255, 90, 31, 0.35);
+
+  --bg-color: #f6f4ee;
+  --surface-color: #ffffff;
+  --text-color: #121316;
+  --border-color: rgba(18, 19, 22, 0.12);
+  --header-bg: rgba(246, 244, 238, 0.88);
+  --hero-heading-from: #7b8089;
+  --hero-heading-to: #121316;
+  --card-shadow: 0 -20px 45px -20px rgba(0, 0, 0, 0.12);
+
+  color-scheme: light;
+}
+
 @theme {
   --font-sans: "Kanit", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-display: "Kanit", sans-serif;
   --font-editorial: "Kanit", sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
 
-  --color-ink: #0c0c0c;
-  --color-ink-soft: #141416;
-  --color-ink-card: #18181b;
-  --color-paper: #ece7dd;
-  --color-paper-ink: #1a1714;
-  --color-paper-muted: rgba(26, 23, 20, 0.65);
-  --color-paper-border: rgba(26, 23, 20, 0.15);
-  --color-mist: #d7e2ea;
-  --color-ember: #ff5a1f;
-  --color-ember-deep: #c2410c;
-  --color-ember-glow: rgba(255, 90, 31, 0.45);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-ink-card: var(--ink-card);
+  --color-paper: var(--paper);
+  --color-paper-ink: var(--paper-ink);
+  --color-paper-muted: var(--paper-muted);
+  --color-paper-border: var(--paper-border);
+  --color-mist: var(--mist);
+  --color-ember: var(--ember);
+  --color-ember-deep: var(--ember-deep);
+  --color-ember-glow: var(--ember-glow);
 
-  --color-brand-primary: #3B82F6;
-  --color-brand-secondary: #60A5FA;
-  
-  --color-theme-bg: var(--bg-color);
-  --color-theme-surface: var(--surface-color);
-  --color-theme-text: var(--text-color);
-  --color-theme-muted: var(--text-muted);
-  --color-theme-dim: var(--text-dim);
-  --color-theme-border: var(--border-color);
-  --color-theme-glass: var(--glass-bg);
-}
-
-:root {
-  --bg-color: #0c0c0c;
-  --surface-color: #141416;
-  --text-color: #d7e2ea;
-  --text-muted: rgba(215, 226, 234, 0.5);
-  --text-dim: rgba(215, 226, 234, 0.75);
-  --border-color: rgba(215, 226, 234, 0.1);
-  --panel-bg: rgba(20, 20, 22, 0.75);
-  --glass-bg: rgba(12, 12, 12, 0.85);
-
-  background-color: var(--bg-color);
-  color: var(--text-color);
-  color-scheme: dark;
-}
-
-:root[data-theme='light'] {
-  --bg-color: #f8fafc;
-  --surface-color: #ffffff;
-  --text-color: #0c0c0c;
-  --text-muted: rgba(12, 12, 12, 0.55);
-  --text-dim: rgba(12, 12, 12, 0.75);
-  --border-color: rgba(12, 12, 12, 0.1);
-  --panel-bg: rgba(255, 255, 255, 0.9);
-  --glass-bg: rgba(248, 250, 252, 0.9);
-  color-scheme: light;
+  --color-brand-primary: #ff5a1f;
+  --color-brand-secondary: #ff8a4c;
 }
 
 * {
@@ -71,10 +88,11 @@ html, body {
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 ::selection {
-  background: #ff5a1f;
+  background: var(--ember);
   color: #fff;
 }
 
@@ -83,19 +101,19 @@ html, body {
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #0c0c0c;
+  background: var(--bg-color);
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(215, 226, 234, 0.15);
+  background: color-mix(in oklab, var(--text-color) 18%, transparent);
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #ff5a1f;
+  background: var(--ember);
 }
 
 /* Codecuy Signature Gradient Text */
 .hero-heading {
-  background: linear-gradient(180deg, #5a5e66 0%, #e8e2d5 100%);
+  background: linear-gradient(180deg, var(--hero-heading-from) 0%, var(--hero-heading-to) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -129,8 +147,16 @@ html, body {
   inset: 0;
   z-index: 9999;
   pointer-events: none;
-  opacity: 0.04;
+  opacity: 0.035;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Dynamic Monochromatic Icon Invert */
+[data-theme='dark'] .icon-mono {
+  filter: invert(1);
+}
+[data-theme='light'] .icon-mono {
+  filter: none;
 }
 
 /* Infinite Marquee Animation */

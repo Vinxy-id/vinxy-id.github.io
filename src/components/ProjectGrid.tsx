@@ -207,7 +207,7 @@ function StickyProjectCard({
           top: `${index * 22}px`,
           transformOrigin: 'top center',
         }}
-        className={`relative w-full max-w-6xl ${round} border border-mist/15 p-5 sm:p-7 md:p-8 shadow-[0_-25px_60px_-25px_rgba(0,0,0,0.9)] bg-ink-soft`}
+        className={`relative w-full max-w-6xl ${round} border border-mist/15 p-5 sm:p-7 md:p-8 shadow-[var(--card-shadow)] bg-ink-soft transition-colors duration-300`}
       >
         {/* Header row */}
         <div className="flex items-center justify-between gap-4 flex-wrap mb-4 sm:mb-6">
@@ -516,7 +516,7 @@ export default function ProjectGrid() {
               {/* Modal Close Button */}
               <button
                 onClick={() => setSelectedProject(null)}
-                className="absolute top-6 right-6 p-2 rounded-full bg-white/5 border border-mist/10 text-mist/70 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
+                className="absolute top-6 right-6 p-2 rounded-full bg-mist/5 border border-mist/10 text-mist/70 hover:text-ember hover:bg-mist/10 transition-colors cursor-pointer"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -532,7 +532,7 @@ export default function ProjectGrid() {
                       {selectedProject.vibe}
                     </span>
                   </div>
-                  <h3 className="font-editorial text-3xl md:text-4xl font-bold uppercase text-white tracking-tight">
+                  <h3 className="font-editorial text-3xl md:text-4xl font-bold uppercase text-mist tracking-tight">
                     {selectedProject.title}
                   </h3>
                   <p className="text-mist/70 mt-2 text-sm md:text-base leading-relaxed">

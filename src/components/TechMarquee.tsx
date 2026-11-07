@@ -6,45 +6,47 @@
 import React from 'react';
 
 const ROW_1 = [
-  { name: 'React', slug: 'react', color: '' },
-  { name: 'TypeScript', slug: 'typescript', color: '' },
-  { name: 'JavaScript', slug: 'javascript', color: '' },
-  { name: 'Next.js', slug: 'nextdotjs', color: 'white' },
-  { name: 'Tailwind CSS', slug: 'tailwindcss', color: '' },
-  { name: 'PostgreSQL', slug: 'postgresql', color: '' },
-  { name: 'Node.js', slug: 'nodedotjs', color: '' },
-  { name: 'GraphQL', slug: 'graphql', color: '' },
-  { name: 'Vite', slug: 'vite', color: '' },
-  { name: 'HTML5', slug: 'html5', color: '' },
-  { name: 'CSS3', slug: 'css', color: '' },
+  { name: 'React', slug: 'react', isMono: false },
+  { name: 'TypeScript', slug: 'typescript', isMono: false },
+  { name: 'JavaScript', slug: 'javascript', isMono: false },
+  { name: 'Next.js', slug: 'nextdotjs', isMono: true },
+  { name: 'Tailwind CSS', slug: 'tailwindcss', isMono: false },
+  { name: 'PostgreSQL', slug: 'postgresql', isMono: false },
+  { name: 'Node.js', slug: 'nodedotjs', isMono: false },
+  { name: 'GraphQL', slug: 'graphql', isMono: false },
+  { name: 'Vite', slug: 'vite', isMono: false },
+  { name: 'HTML5', slug: 'html5', isMono: false },
+  { name: 'CSS3', slug: 'css', isMono: false },
 ];
 
 const ROW_2 = [
-  { name: 'Flutter', slug: 'flutter', color: '' },
-  { name: 'Dart', slug: 'dart', color: '' },
-  { name: 'Three.js', slug: 'threedotjs', color: 'white' },
-  { name: 'Figma', slug: 'figma', color: '' },
-  { name: 'Git', slug: 'git', color: '' },
-  { name: 'Laravel', slug: 'laravel', color: '' },
-  { name: 'Python', slug: 'python', color: '' },
-  { name: 'Leaflet', slug: 'leaflet', color: '' },
-  { name: 'Blender 3D', slug: 'blender', color: '' },
-  { name: 'DaVinci Resolve', slug: 'davinciresolve', color: '' },
-  { name: 'Vercel', slug: 'vercel', color: 'white' },
+  { name: 'Flutter', slug: 'flutter', isMono: false },
+  { name: 'Dart', slug: 'dart', isMono: false },
+  { name: 'Three.js', slug: 'threedotjs', isMono: true },
+  { name: 'Figma', slug: 'figma', isMono: false },
+  { name: 'Git', slug: 'git', isMono: false },
+  { name: 'Laravel', slug: 'laravel', isMono: false },
+  { name: 'Python', slug: 'python', isMono: false },
+  { name: 'Leaflet', slug: 'leaflet', isMono: false },
+  { name: 'Blender 3D', slug: 'blender', isMono: false },
+  { name: 'DaVinci Resolve', slug: 'davinciresolve', isMono: false },
+  { name: 'Vercel', slug: 'vercel', isMono: true },
 ];
 
-function BrandTile({ item }: { item: { name: string; slug: string; color: string } }) {
-  const src = `https://cdn.simpleicons.org/${item.slug}${item.color ? '/' + item.color : ''}`;
+function BrandTile({ item }: { item: { name: string; slug: string; isMono: boolean } }) {
+  const src = `https://cdn.simpleicons.org/${item.slug}`;
   return (
     <div
-      className="shrink-0 flex flex-col items-center justify-center gap-3 rounded-2xl border border-mist/10 bg-ink-soft transition-all duration-300 hover:border-ember/40 hover:bg-[#1a1a1e] group"
+      className="shrink-0 flex flex-col items-center justify-center gap-3 rounded-2xl border border-mist/10 bg-ink-soft transition-all duration-300 hover:border-ember/40 hover:bg-mist/5 group"
       style={{ width: '220px', height: '150px' }}
     >
       <img
         src={src}
         alt={item.name}
         loading="lazy"
-        className="h-12 w-12 md:h-16 md:w-16 object-contain transition-transform duration-300 group-hover:scale-110"
+        className={`h-12 w-12 md:h-16 md:w-16 object-contain transition-transform duration-300 group-hover:scale-110 ${
+          item.isMono ? 'icon-mono' : ''
+        }`}
       />
       <span className="font-mono text-[11px] uppercase tracking-wider text-mist/40 group-hover:text-mist transition-colors">
         {item.name}

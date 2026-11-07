@@ -63,31 +63,31 @@ const MILESTONES: Milestone[] = [
 
 export default function JourneyTimeline() {
   return (
-    <section id="journey" className="py-28 px-5 sm:px-8 md:px-12 max-w-7xl mx-auto">
+    <section id="journey" className="py-28 px-5 sm:px-8 md:px-12 max-w-7xl mx-auto transition-colors duration-300">
       {/* Editorial About Header (Codecuy Style) */}
       <div className="mb-20">
-        <div className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-[0.2em] text-white/40 mb-4">
-          <span className="w-2 h-2 rounded-full bg-brand-primary" />
+        <div className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-[0.2em] text-mist/50 mb-4">
+          <span className="w-2 h-2 rounded-full bg-ember" />
           <span>About Me · Career & Academic Milestones</span>
         </div>
 
-        <h2 className="font-editorial text-5xl sm:text-7xl md:text-8xl font-black uppercase tracking-tight text-white mb-8">
-          <span className="text-silver block">THE JOURNEY &</span>
+        <h2 className="font-editorial text-5xl sm:text-7xl md:text-8xl font-black uppercase tracking-tight text-mist mb-8">
+          <span className="text-mist/40 block">THE JOURNEY &</span>
           <span>COMPUTATIONAL ROOTS.</span>
         </h2>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start border-t border-white/10 pt-8">
-          <p className="lg:col-span-8 font-sans text-base sm:text-lg md:text-xl text-white/80 leading-relaxed font-normal">
-            I’m <strong className="text-white font-semibold">Alvin Widiantara</strong>, an Informatics Engineering student and Creative Technologist. I specialize in the convergence of <strong className="text-white font-semibold">computational architecture</strong> and <strong className="text-white font-semibold">aesthetic direction</strong> — architecting spatial Web-GIS platforms, engineering gamified Flutter applications, and producing high-retention motion media. Winner of <strong className="text-brand-primary font-semibold">1st Place in Creative Visual Competition II</strong>.
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start border-t border-mist/10 pt-8">
+          <p className="lg:col-span-8 font-sans text-base sm:text-lg md:text-xl text-mist/80 leading-relaxed font-normal">
+            I’m <strong className="text-mist font-semibold">Alvin Widiantara</strong>, an Informatics Engineering student and Creative Technologist. I specialize in the convergence of <strong className="text-mist font-semibold">computational architecture</strong> and <strong className="text-mist font-semibold">aesthetic direction</strong> — architecting spatial Web-GIS platforms, engineering gamified Flutter applications, and producing high-retention motion media. Winner of <strong className="text-ember font-semibold">1st Place in Creative Visual Competition II</strong>.
           </p>
 
           <div className="lg:col-span-4 flex flex-col gap-3">
-            <div className="p-4 rounded-2xl bg-[#141416] border border-white/8 flex items-center justify-between">
-              <span className="font-mono text-xs text-white/50 uppercase tracking-wider">Lighthouse Score</span>
-              <span className="font-editorial text-xl font-black text-brand-primary">98+ Speed</span>
+            <div className="p-4 rounded-2xl bg-ink-soft border border-mist/10 flex items-center justify-between">
+              <span className="font-mono text-xs text-mist/50 uppercase tracking-wider">Lighthouse Score</span>
+              <span className="font-editorial text-xl font-black text-ember">98+ Speed</span>
             </div>
-            <div className="p-4 rounded-2xl bg-[#141416] border border-white/8 flex items-center justify-between">
-              <span className="font-mono text-xs text-white/50 uppercase tracking-wider">CVC II Recognition</span>
+            <div className="p-4 rounded-2xl bg-ink-soft border border-mist/10 flex items-center justify-between">
+              <span className="font-mono text-xs text-mist/50 uppercase tracking-wider">CVC II Recognition</span>
               <span className="font-editorial text-xl font-black text-amber-400">1st Place Gold</span>
             </div>
           </div>
@@ -106,48 +106,48 @@ export default function JourneyTimeline() {
               transition={{ delay: idx * 0.08, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
               viewport={{ once: false, amount: 0.1 }}
             >
-              <SpotlightCard className="p-8 h-full flex flex-col justify-between bg-[#141416] border-white/8 rounded-3xl">
+              <SpotlightCard className="p-8 h-full flex flex-col justify-between bg-ink-soft border border-mist/10 rounded-3xl">
                 <div>
                   <div className="flex items-center justify-between gap-4 mb-4">
-                    <span className="font-mono text-xs font-semibold px-3 py-1 rounded-full bg-brand-primary/10 text-brand-primary border border-brand-primary/25">
+                    <span className="font-mono text-xs font-semibold px-3 py-1 rounded-full bg-ember/10 text-ember border border-ember/25">
                       {item.year}
                     </span>
                     {item.badge && (
-                      <span className="font-mono text-[11px] uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-white/5 text-white/70 border border-white/10">
+                      <span className="font-mono text-[11px] uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-mist/5 text-mist/70 border border-mist/10">
                         {item.badge}
                       </span>
                     )}
                   </div>
 
                   <div className="flex items-start gap-3.5 mb-3">
-                    <div className="w-10 h-10 rounded-xl bg-brand-primary/10 border border-brand-primary/20 flex items-center justify-center shrink-0 text-brand-primary mt-1">
+                    <div className="w-10 h-10 rounded-xl bg-ember/10 border border-ember/20 flex items-center justify-center shrink-0 text-ember mt-1">
                       <Icon className="w-5 h-5" />
                     </div>
                     <div>
-                      <h3 className="text-xl sm:text-2xl font-editorial font-black uppercase tracking-tight text-white">{item.role}</h3>
-                      <p className="text-sm text-brand-secondary font-medium">{item.organization}</p>
+                      <h3 className="text-xl sm:text-2xl font-editorial font-black uppercase tracking-tight text-mist">{item.role}</h3>
+                      <p className="text-sm text-mist/60 font-medium">{item.organization}</p>
                     </div>
                   </div>
 
-                  <div className="flex items-center gap-1.5 text-xs text-white/50 font-mono mb-4">
-                    <MapPin className="w-3.5 h-3.5 text-brand-primary" />
+                  <div className="flex items-center gap-1.5 text-xs text-mist/50 font-mono mb-4">
+                    <MapPin className="w-3.5 h-3.5 text-ember" />
                     <span>{item.location}</span>
                   </div>
 
-                  <p className="text-sm text-white/70 leading-relaxed mb-6 font-normal">
+                  <p className="text-sm text-mist/70 leading-relaxed mb-6 font-normal">
                     {item.description}
                   </p>
                 </div>
 
-                <div className="pt-4 border-t border-white/10">
-                  <span className="text-[10px] font-mono uppercase tracking-wider text-white/40 block mb-2.5 font-bold">
+                <div className="pt-4 border-t border-mist/10">
+                  <span className="text-[10px] font-mono uppercase tracking-wider text-mist/40 block mb-2.5 font-bold">
                     Competencies Applied:
                   </span>
                   <div className="flex flex-wrap gap-2">
                     {item.highlights.map((tech) => (
                       <span
                         key={tech}
-                        className="text-[11px] font-mono px-2.5 py-1 rounded-md bg-black/50 border border-white/10 text-white/80"
+                        className="text-[11px] font-mono px-2.5 py-1 rounded-md bg-ink/70 border border-mist/10 text-mist/80"
                       >
                         {tech}
                       </span>
