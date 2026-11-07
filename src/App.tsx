@@ -29,6 +29,15 @@ export default function App() {
   const [activeSection, setActiveSection] = useState('hero');
 
   useEffect(() => {
+    // Prevent browser from restoring scroll position to bottom on page reload
+    if (typeof window !== 'undefined' && 'scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual';
+    }
+    if (window.location.hash) {
+      window.history.replaceState(null, '', window.location.pathname + window.location.search);
+    }
+    window.scrollTo(0, 0);
+
     const observerOptions = {
       root: null,
       rootMargin: '-20% 0px -60% 0px',
@@ -53,6 +62,20 @@ export default function App() {
     return () => observer.disconnect();
   }, []);
 
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    const targetId = href.replace('#', '');
+    const el = document.getElementById(targetId);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const handleLogoClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   const navLinks = [
     { href: '#about', label: 'About' },
     { href: '#services', label: 'Services' },
@@ -76,7 +99,8 @@ export default function App() {
         {/* Brand Wordmark */}
         <a
           href="#"
-          className="font-black text-xl tracking-tight text-mist flex items-center gap-1 group font-editorial uppercase transition-colors"
+          onClick={handleLogoClick}
+          className="font-black text-xl tracking-tight text-mist flex items-center gap-1 group font-editorial uppercase transition-colors cursor-pointer"
         >
           <span>ALVIN</span>
           <span className="text-ember text-sm font-mono group-hover:rotate-45 transition-transform duration-300">
@@ -97,7 +121,8 @@ export default function App() {
               <a
                 key={item.label}
                 href={item.href}
-                className="font-medium text-xs uppercase tracking-widest text-mist/60 hover:text-mist transition-colors font-mono"
+                onClick={(e) => handleNavClick(e, item.href)}
+                className="font-medium text-xs uppercase tracking-widest text-mist/60 hover:text-mist transition-colors font-mono cursor-pointer"
               >
                 {item.label}
               </a>

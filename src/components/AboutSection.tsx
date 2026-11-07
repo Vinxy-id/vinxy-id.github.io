@@ -102,6 +102,10 @@ export default function AboutSection() {
         {/* Ember CTA Pill Button */}
         <a
           href="#contact"
+          onClick={(e) => {
+            e.preventDefault();
+            document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+          }}
           className="ember-btn group inline-flex items-center gap-2 rounded-full text-white font-medium uppercase tracking-widest px-8 py-3.5 sm:px-10 sm:py-4 text-xs sm:text-sm md:text-base transition-[transform,box-shadow] duration-300 hover:-translate-y-0.5"
         >
           <span>Let's work together</span>

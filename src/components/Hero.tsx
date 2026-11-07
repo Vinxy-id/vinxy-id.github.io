@@ -81,6 +81,10 @@ export default function Hero() {
         <div className="flex flex-wrap items-center gap-3 w-full md:w-auto">
           <a
             href="#contact"
+            onClick={(e) => {
+              e.preventDefault();
+              document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+            }}
             className="ember-btn inline-flex items-center gap-2 rounded-full text-white font-medium uppercase tracking-widest px-7 py-3 sm:px-9 sm:py-3.5 text-xs sm:text-sm transition-[transform,box-shadow] duration-300 hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
           >
             <span>Let's work together</span>
