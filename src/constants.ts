@@ -12,7 +12,7 @@ export const PROJECTS: Project[] = [
     description: 'Indonesian B2B SaaS platform for automatic industrial electricity tariff audits, Permen ESDM No. 28/2016 compliance, multimodal Gemini 3.8 Flash bill OCR, and 24h peak-load shifting simulation.',
     category: 'Energy AI & SaaS',
     tags: ['Next.js 15', 'Gemini 3.8 Flash', 'B2B SaaS', 'Permen ESDM 28/2016'],
-    image: './assets/projects/wattpulse-dashboard.png',
+    image: './assets/projects/wattpulse-dashboard.webp',
     link: 'https://wattpulse-ai.vercel.app',
     vibe: 'Industrial Decarbonization',
     details: {
@@ -28,7 +28,7 @@ export const PROJECTS: Project[] = [
     description: 'Digital Twin 3D CAD & Smart CleanTech IoT system reducing pottery kiln particulate emissions with real-time DLH geospatial monitoring.',
     category: 'Digital Twin & CleanTech',
     tags: ['Digital Twin 3D', 'IoT Telemetry', 'CleanTech', 'LKTIN 2026'],
-    image: './assets/projects/ecokiln-live-hero.png',
+    image: './assets/projects/ecokiln-live-hero.webp',
     link: 'https://eco-kiln-web3d.vercel.app',
     vibe: 'Environmental Precision',
     details: {
@@ -44,7 +44,7 @@ export const PROJECTS: Project[] = [
     description: 'Integrated multi-stakeholder supply chain platform with Web-GIS mapping, volumetric AI analysis, and smart contracts for quarry minerals.',
     category: 'Spatial Logistics & Web-GIS',
     tags: ['Leaflet Web-GIS', 'PostGIS', 'Smart Contract', 'QR Manifest'],
-    image: './assets/projects/simukti-live-map.png',
+    image: './assets/projects/simukti-live-map.webp',
     link: 'https://si-mukti.vercel.app',
     vibe: 'Geospatial & Traceability',
     details: {
@@ -60,7 +60,7 @@ export const PROJECTS: Project[] = [
     description: 'Winner (Juara 2) Creative Visual Competition II. Gamified kitchen inventory management and procedural recipe assistant with expiry alert pipelines.',
     category: 'Winner CVC II & Mobile UX',
     tags: ['Flutter', 'Mobile UX', 'Gamification', 'Winner CVC II'],
-    image: './assets/projects/pantrix-live-hero.png',
+    image: './assets/projects/pantrix-live-hero.webp',
     link: 'https://vinxy-id.github.io/Pantrix/',
     vibe: 'Gamified Utility',
     details: {
@@ -76,7 +76,7 @@ export const PROJECTS: Project[] = [
     description: 'Asynchronous code-review and structured peer-mentoring platform resolving off-class debugging deadlocks for engineering students.',
     category: 'Hackathon & DevTools',
     tags: ['React', 'WebRTC', 'Monaco Editor', 'STACK 2026 GDGOC ITB'],
-    image: './assets/projects/peerstack-preview.png',
+    image: './assets/projects/peerstack-preview.webp',
     link: 'https://github.com/Vinxy-id',
     vibe: 'Collaborative Developer EdTech',
     details: {
@@ -92,7 +92,7 @@ export const PROJECTS: Project[] = [
     description: 'Adaptive institutional learning management system integrating automated cohort performance analytics and personalized curriculum delivery.',
     category: 'EdTech & Adaptive AI',
     tags: ['React', 'AI Analytics', 'LMS Architecture', 'INOVEST 2026'],
-    image: './assets/projects/eduboard-mockup.png',
+    image: './assets/projects/eduboard-mockup.webp',
     link: 'https://github.com/Vinxy-id',
     vibe: 'Adaptive Intelligence',
     details: {
@@ -108,7 +108,7 @@ export const PROJECTS: Project[] = [
     description: 'High-conversion responsive web platform and enrollment system for premier athletic swimming academy with interactive curriculum selectors and 98+ Google Lighthouse score.',
     category: 'Production Web',
     tags: ['React 19', 'TypeScript', 'Tailwind CSS', 'Lighthouse 98+'],
-    image: './assets/projects/aqualux-live-hero.png',
+    image: './assets/projects/aqualux-live-hero.webp',
     link: 'https://aqualux-delta.vercel.app',
     vibe: 'Fluid Conversion',
     details: {
@@ -124,7 +124,7 @@ export const PROJECTS: Project[] = [
     description: 'Interactive case-study web minigame designed for freshmen orientation featuring algorithmic problem-solving.',
     category: 'Technical Game',
     tags: ['JavaScript', 'Logic Puzzles', 'Gamification', 'Freshmen Onboarding'],
-    image: './assets/projects/adhigana.png',
+    image: './assets/projects/adhigana.webp',
     link: 'https://github.com/Vinxy-id/adhigana-studi-kasus',
     vibe: 'Algorithmic Escape',
     details: {
@@ -140,7 +140,7 @@ export const PROJECTS: Project[] = [
     description: 'Sistem informasi rantai pasok digital terpadu klaster IKM Marmer & Onyx Tulungagung dengan integrasi forecasting ARIMA, katalog multi-filter, dan manajemen SPK produksi.',
     category: 'Enterprise SCM & Cloud',
     tags: ['Laravel 11', 'PostgreSQL', 'Python ARIMA', 'Live VPS'],
-    image: './assets/projects/scm-live-hero.png',
+    image: './assets/projects/scm-live-hero.webp',
     link: 'https://onyxtulungagung.id',
     vibe: 'Industrial E-Supply Chain',
     details: {

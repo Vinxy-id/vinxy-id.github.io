@@ -73,10 +73,10 @@ const STICKY_PROJECTS = [
     year: '2026',
     tags: ['Next.js 15', 'Gemini 3.8 Flash', 'B2B SaaS', 'Live on Vercel'],
     col1: [
-      './assets/projects/wattpulse-schedule.png',
-      './assets/projects/wattpulse-ocr.png',
+      './assets/projects/wattpulse-schedule.webp',
+      './assets/projects/wattpulse-ocr.webp',
     ],
-    col2: './assets/projects/wattpulse-dashboard.png',
+    col2: './assets/projects/wattpulse-dashboard.webp',
     projectRef: PROJECTS.find((p) => p.id === 'wattpulse') || PROJECTS[0],
     liveUrl: 'https://wattpulse-ai.vercel.app',
     isLive: true,
@@ -90,10 +90,10 @@ const STICKY_PROJECTS = [
     year: '2024 - 2026',
     tags: ['Laravel 11', 'PostgreSQL', 'Python ARIMA', 'Live: onyxtulungagung.id'],
     col1: [
-      './assets/projects/scm-dashboard-kpi.png',
-      './assets/projects/scm-live-katalog-page.png',
+      './assets/projects/scm-dashboard-kpi.webp',
+      './assets/projects/scm-live-katalog-page.webp',
     ],
-    col2: './assets/projects/scm-live-hero.png',
+    col2: './assets/projects/scm-live-hero.webp',
     projectRef: PROJECTS.find((p) => p.id === 'web-scm') || PROJECTS[0],
     liveUrl: 'https://onyxtulungagung.id',
     isLive: true,
@@ -107,10 +107,10 @@ const STICKY_PROJECTS = [
     year: '2025',
     tags: ['React 19', 'TypeScript', 'Tailwind CSS', 'Live on Vercel'],
     col1: [
-      './assets/projects/aqualux-live-programs.png',
-      './assets/projects/aqualux-live-cta.png',
+      './assets/projects/aqualux-live-programs.webp',
+      './assets/projects/aqualux-live-cta.webp',
     ],
-    col2: './assets/projects/aqualux-live-hero.png',
+    col2: './assets/projects/aqualux-live-hero.webp',
     projectRef: PROJECTS.find((p) => p.id === 'aqualux') || PROJECTS[0],
     liveUrl: 'https://aqualux-delta.vercel.app',
     isLive: true,
@@ -124,10 +124,10 @@ const STICKY_PROJECTS = [
     year: '2026',
     tags: ['Three.js 3D', 'IoT Telemetry', 'CleanTech', 'LKTIN 2026'],
     col1: [
-      './assets/projects/ecokiln-live-3d.png',
-      './assets/projects/ecokiln-live-portal.png',
+      './assets/projects/ecokiln-live-3d.webp',
+      './assets/projects/ecokiln-live-portal.webp',
     ],
-    col2: './assets/projects/ecokiln-live-hero.png',
+    col2: './assets/projects/ecokiln-live-hero.webp',
     projectRef: PROJECTS.find((p) => p.id === 'ecokiln') || PROJECTS[1],
     liveUrl: 'https://eco-kiln-web3d.vercel.app',
     isLive: true,
@@ -141,10 +141,10 @@ const STICKY_PROJECTS = [
     year: '2026',
     tags: ['React 19', 'Leaflet Web-GIS', 'PostGIS', 'Smart Contract'],
     col1: [
-      './assets/projects/simukti-live-hero.png',
-      './assets/projects/simukti-live-dashboard.png',
+      './assets/projects/simukti-live-hero.webp',
+      './assets/projects/simukti-live-dashboard.webp',
     ],
-    col2: './assets/projects/simukti-live-map.png',
+    col2: './assets/projects/simukti-live-map.webp',
     projectRef: PROJECTS.find((p) => p.id === 'si-mukti') || PROJECTS[2],
     liveUrl: 'https://si-mukti.vercel.app',
     isLive: true,
@@ -158,16 +158,55 @@ const STICKY_PROJECTS = [
     year: '2025',
     tags: ['Flutter', 'Dart', 'Gamification', 'Live Web Demo'],
     col1: [
-      './assets/projects/pantrix-live-mobile.png',
-      './assets/projects/pantrix-live-features.png',
+      './assets/projects/pantrix-live-mobile.webp',
+      './assets/projects/pantrix-live-features.webp',
     ],
-    col2: './assets/projects/pantrix-live-hero.png',
+    col2: './assets/projects/pantrix-live-hero.webp',
     projectRef: PROJECTS.find((p) => p.id === 'pantrix') || PROJECTS[3],
     liveUrl: 'https://vinxy-id.github.io/Pantrix/',
     isLive: true,
     liveLabel: 'Demo',
   },
 ];
+
+function ProjectImage({
+  src,
+  alt,
+  className = '',
+  style,
+  isPriority = false,
+}: {
+  src: string;
+  alt: string;
+  className?: string;
+  style?: React.CSSProperties;
+  isPriority?: boolean;
+}) {
+  const [loaded, setLoaded] = useState(false);
+
+  return (
+    <div className="relative w-full h-full overflow-hidden bg-[#101014]">
+      {/* Skeleton Pulse */}
+      <div
+        className={`absolute inset-0 bg-mist/5 transition-opacity duration-300 pointer-events-none ${
+          loaded ? 'opacity-0' : 'opacity-100 animate-pulse'
+        }`}
+      />
+      <img
+        src={src}
+        alt={alt}
+        loading={isPriority ? 'eager' : 'lazy'}
+        decoding="async"
+        fetchPriority={isPriority ? 'high' : 'low'}
+        onLoad={() => setLoaded(true)}
+        className={`${className} transition-opacity duration-300 ${
+          loaded ? 'opacity-100' : 'opacity-0'
+        }`}
+        style={style}
+      />
+    </div>
+  );
+}
 
 function StickyProjectCard({
   project,
@@ -300,21 +339,19 @@ function StickyProjectCard({
             {/* Left Column (40% width) - 2 Stacked Images */}
             <div className="flex flex-row md:flex-col gap-3 sm:gap-4 md:gap-5 w-full md:w-[40%]">
               <div className="relative w-1/2 md:w-full overflow-hidden rounded-[14px] sm:rounded-[18px] border border-mist/10">
-                <img
+                <ProjectImage
                   src={project.col1[0]}
                   alt={project.name}
-                  loading="eager"
-                  decoding="async"
+                  isPriority={index === 0}
                   className="w-full h-full object-cover transition-transform duration-500 group-hover/mockup:scale-[1.03]"
                   style={{ height: 'clamp(130px, 14vw, 200px)' }}
                 />
               </div>
               <div className="relative w-1/2 md:w-full overflow-hidden rounded-[14px] sm:rounded-[18px] border border-mist/10">
-                <img
+                <ProjectImage
                   src={project.col1[1]}
                   alt={project.name}
-                  loading="eager"
-                  decoding="async"
+                  isPriority={index === 0}
                   className="w-full h-full object-cover transition-transform duration-500 group-hover/mockup:scale-[1.03]"
                   style={{ height: 'clamp(140px, 17vw, 250px)' }}
                 />
@@ -323,11 +360,10 @@ function StickyProjectCard({
 
             {/* Right Column (60% width) - 1 Large Hero Image */}
             <div className="relative w-full md:w-[60%] min-h-[200px] md:min-h-[auto] bg-black/50 rounded-[14px] sm:rounded-[18px] overflow-hidden flex items-center justify-center border border-mist/10 group">
-              <img
+              <ProjectImage
                 src={project.col2}
                 alt={project.name}
-                loading="eager"
-                decoding="async"
+                isPriority={index === 0}
                 className="w-full h-full object-cover transition-transform duration-500 group-hover/mockup:scale-[1.02]"
                 style={{ maxHeight: '460px', minHeight: 'clamp(200px, 32vw, 460px)' }}
               />
@@ -445,10 +481,12 @@ export default function ProjectGrid() {
                 key={PROJECTS[activeChapter].id}
                 src={PROJECTS[activeChapter].image}
                 alt={PROJECTS[activeChapter].title}
-                initial={{ opacity: 0, filter: 'blur(8px)', scale: 1.05 }}
-                animate={{ opacity: 1, filter: 'blur(0px)', scale: 1 }}
-                exit={{ opacity: 0, filter: 'blur(8px)', scale: 1.05 }}
-                transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+                loading="lazy"
+                decoding="async"
+                initial={{ opacity: 0, scale: 1.03 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 1.03 }}
+                transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
                 className="w-full h-full object-cover"
               />
             </AnimatePresence>
@@ -545,6 +583,8 @@ export default function ProjectGrid() {
                   <img
                     src={selectedProject.image}
                     alt={selectedProject.title}
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-full object-cover"
                   />
                 </div>
