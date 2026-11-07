@@ -8,7 +8,7 @@ import { motion, useScroll, useTransform } from 'motion/react';
 import { ArrowUpRight } from 'lucide-react';
 
 const ABOUT_TEXT =
-  "I'm Alvin Widiantara, an Informatics Engineering student and Creative Technologist who crafts fast, accessible interfaces, geospatial architectures, and gamified digital systems with React, TypeScript, Flutter, and PostGIS. I work best with teams shipping products that need to feel as good as they look. Winner of 1st Place in Creative Visual Competition II.";
+  "I'm Alvin Widiantara, an Informatics Engineering student and Creative Technologist who crafts fast, accessible interfaces, geospatial architectures, and gamified digital systems with React, TypeScript, Flutter, and PostGIS. I work best with teams shipping products that need to feel as good as they look. Top 4 Finalist in National Business Case BMNC (FEB UNAIR) and 1st Place Winner in Embun Festival.";
 
 function CharSpan({ char, index, total, scrollProgress }: { char: string; index: number; total: number; scrollProgress: any }) {
   const start = index / total;
@@ -72,10 +72,10 @@ export default function AboutSection() {
           <div className="flex flex-wrap justify-center gap-x-10 gap-y-6 sm:gap-x-16">
             <div className="flex flex-col items-center">
               <span className="heading-ember font-black leading-none" style={{ fontSize: 'clamp(2.5rem, 6vw, 4rem)' }}>
-                1st Place
+                Top 4
               </span>
-              <span className="mt-1 text-mist/50 text-xs sm:text-sm font-medium uppercase tracking-widest">
-                Winner CVC II Gold
+              <span className="mt-1 text-mist/50 text-xs sm:text-sm font-medium uppercase tracking-widest text-center">
+                Business Case FEB UNAIR
               </span>
             </div>
 

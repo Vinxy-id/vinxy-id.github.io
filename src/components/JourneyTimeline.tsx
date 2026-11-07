@@ -21,43 +21,53 @@ interface Milestone {
 const MILESTONES: Milestone[] = [
   {
     year: '2026',
+    role: 'Top 4 Finalist',
+    organization: 'National Business Case BMNC (FEB UNAIR)',
+    location: 'Surabaya, Indonesia',
+    badge: 'National Finalist',
+    description: 'Formulated corporate scalability and nationwide franchise roadmap for GBT Laras Imbang (75-year automotive specialist), engineering a Hub & Spoke replication model, EV-ready diagnostic centers, and Malaysia JV entry strategy.',
+    highlights: ['Two-Tier Hub & Spoke Model', 'EV Precision Infrastructure', 'Financial Feasibility & BEP', 'Global Market Entry Strategy'],
+    icon: Award,
+  },
+  {
+    year: '2026',
     role: 'Lead Architect & Researcher',
-    organization: 'SI-MUKTI Project (LKTIN UNIMED 2026)',
+    organization: 'SI-MUKTI Project (Research Innovation)',
     location: 'Tulungagung / Kebumen',
-    badge: 'Research & Innovation',
+    badge: 'Spatial & GIS',
     description: 'Designed and engineered an integrated multi-stakeholder supply chain platform combining Leaflet Web-GIS geospatial tracing, AI volumetric measurement, and smart contracts for traditional tile & marble industries.',
     highlights: ['Web-GIS Geospatial Analytics', 'Volumetric AI Pipeline', 'PostGIS 16+ DDL & Spatials', 'Smart Contract QR Traceability'],
     icon: Sparkles,
   },
   {
     year: '2025',
-    role: '1st Place Winner',
-    organization: 'Creative Visual Competition II',
-    location: 'National Level',
-    badge: '1st Place Gold Award',
-    description: 'Awarded 1st Place for PANTRIX — a revolutionary gamified meal planning and kitchen inventory mobile assistant with sub-60ms response transitions and procedural recipe generation.',
-    highlights: ['Flutter & Dart Engine', 'Sub-60ms Interaction Speed', 'Gamification Mechanics', 'High-Fidelity UI/UX System'],
+    role: '2nd Place Winner & Lead Designer',
+    organization: 'Creative Visual Competition (UBAYA) / PANTRIX',
+    location: 'Surabaya / National',
+    badge: 'Silver Award',
+    description: 'Awarded 2nd Place in Creative Visual Competition by Universitas Surabaya (UBAYA). Also engineered PANTRIX — a gamified meal planning and smart pantry Flutter assistant with sub-60ms responsive interactions.',
+    highlights: ['Cinematic Visual Storytelling', 'Flutter & Dart Architecture', 'Sub-60ms Interaction Speed', 'Design System Architecture'],
+    icon: Award,
+  },
+  {
+    year: '2024',
+    role: '1st Place Winner (Juara 1 Film Pendek)',
+    organization: 'Embun Theater Festival & Inhum Dhipotion',
+    location: 'East Java, Indonesia',
+    badge: 'Gold Award & Best Script',
+    description: 'Awarded 1st Place in Short Film at Embun Festival UBhi 2024. Also earned dual honors for Best Actor and Best Script at Inhum Dhipotion Showcase for dramatic screenwriting and technical audiovisual production.',
+    highlights: ['1st Place Short Film Production', 'Best Actor & Best Script Award', 'Audiovisual Color Grading', 'Narrative Directing'],
     icon: Award,
   },
   {
     year: '2024 — Present',
-    role: 'Undergraduate Informatics Student',
-    organization: 'Computer Science & Software Engineering',
+    role: 'Undergraduate Informatics Student & Asdos',
+    organization: 'Computer Science & Software Systems Research',
     location: 'East Java, Indonesia',
-    badge: 'Academics',
-    description: 'Focusing on core computing foundations: algorithms, advanced data structures, geospatial information systems (GIS), and modern software engineering practices.',
-    highlights: ['Algorithm Analysis', 'Data Structures (Stack/Queue/Graph)', 'Relational & Spatial Databases', 'Software Architecture Patterns'],
+    badge: 'Academics & Research',
+    description: 'Focusing on core computing foundations: algorithms, geospatial information systems (GIS), and distributed systems. Served as Student Assistant (Asdos) on E-SCM Research developing Laravel 11 and FastAPI microservices.',
+    highlights: ['Algorithm & Data Structures', 'Relational & Spatial Databases', 'FastAPI & Statsmodels Microservices', 'Midtrans Payment Integration'],
     icon: GraduationCap,
-  },
-  {
-    year: '2023 — Present',
-    role: 'Creative Technologist & UI/UX Architect',
-    organization: 'Freelance & Independent Projects',
-    location: 'Remote / Indonesia',
-    badge: 'Production',
-    description: 'Bridging aesthetic visual storytelling and full-stack engineering. Built high-conversion landing pages (AQUALUX), orientation minigames (Digital Frontier), and commercial motion showreels.',
-    highlights: ['React 19 & Next.js Platforms', 'Figma Design Systems', 'Short-Form Kinetic Video', '98+ Lighthouse SEO Audits'],
-    icon: Code2,
   },
 ];
 
@@ -78,7 +88,7 @@ export default function JourneyTimeline() {
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start border-t border-mist/10 pt-8">
           <p className="lg:col-span-8 font-sans text-base sm:text-lg md:text-xl text-mist/80 leading-relaxed font-normal">
-            I’m <strong className="text-mist font-semibold">Alvin Widiantara</strong>, an Informatics Engineering student and Creative Technologist. I specialize in the convergence of <strong className="text-mist font-semibold">computational architecture</strong> and <strong className="text-mist font-semibold">aesthetic direction</strong> — architecting spatial Web-GIS platforms, engineering gamified Flutter applications, and producing high-retention motion media. Winner of <strong className="text-ember font-semibold">1st Place in Creative Visual Competition II</strong>.
+            I’m <strong className="text-mist font-semibold">Alvin Widiantara</strong>, an Informatics Engineering student and Creative Technologist. I specialize in the convergence of <strong className="text-mist font-semibold">computational architecture</strong>, <strong className="text-mist font-semibold">spatial Web-GIS systems</strong>, and <strong className="text-mist font-semibold">strategic business innovation</strong>. Recognized as <strong className="text-ember font-semibold">Top 4 Finalist in National Business Case BMNC (FEB UNAIR)</strong> alongside multiple film and audiovisual directing awards.
           </p>
 
           <div className="lg:col-span-4 flex flex-col gap-3">
@@ -87,8 +97,8 @@ export default function JourneyTimeline() {
               <span className="font-editorial text-xl font-black text-ember">98+ Speed</span>
             </div>
             <div className="p-4 rounded-2xl bg-ink-soft border border-mist/10 flex items-center justify-between">
-              <span className="font-mono text-xs text-mist/50 uppercase tracking-wider">CVC II Recognition</span>
-              <span className="font-editorial text-xl font-black text-amber-400">1st Place Gold</span>
+              <span className="font-mono text-xs text-mist/50 uppercase tracking-wider">BMNC 2026 Case</span>
+              <span className="font-editorial text-xl font-black text-amber-400">Top 4 Finalist</span>
             </div>
           </div>
         </div>

@@ -4,12 +4,64 @@
  */
 
 import { useState } from 'react';
-import { motion } from 'motion/react';
-import { ArrowDown, Download, Sparkles, Copy, Check, MapPin, Trophy, Code2, Cpu, ArrowUpRight } from 'lucide-react';
-import ThreeCanvas from './ThreeCanvas';
+import { motion, AnimatePresence } from 'motion/react';
+import {
+  ArrowDown,
+  Download,
+  Sparkles,
+  Copy,
+  Check,
+  Trophy,
+  Code2,
+  Cpu,
+  ArrowUpRight,
+  X,
+  Award,
+} from 'lucide-react';
+import ThreeCanvas, { Three3DStyle } from './ThreeCanvas';
+
+const AWARDS_LIST = [
+  {
+    rank: 'Top 4 Finalist',
+    title: 'National Business Case BMNC 2026',
+    organizer: 'FEB Universitas Airlangga x BMN Institute',
+    year: '2026',
+    tag: 'Strategic Case & EV Study',
+  },
+  {
+    rank: '1st Place Winner',
+    title: 'Embun Theater Festival 2024',
+    organizer: 'Universitas Bhinneka PGRI',
+    year: '2024',
+    tag: 'Juara 1 Film Pendek',
+  },
+  {
+    rank: '2nd Place Winner',
+    title: 'Creative Visual Competition 2025',
+    organizer: 'Universitas Surabaya (UBAYA)',
+    year: '2025',
+    tag: 'Juara 2 Film Pendek',
+  },
+  {
+    rank: 'Best Actor & Script',
+    title: 'Inhum Dhipotion Showcase 2024',
+    organizer: 'Arts & Cultural Committee',
+    year: '2024',
+    tag: 'Double Category Winner',
+  },
+];
 
 export default function Hero() {
   const [copied, setCopied] = useState(false);
+  const [awardModalOpen, setAwardModalOpen] = useState(false);
+  const [style3D, setStyle3D] = useState<Three3DStyle>(() => {
+    return (localStorage.getItem('hero3d_style') as Three3DStyle) || 'knot';
+  });
+
+  const change3DStyle = (style: Three3DStyle) => {
+    setStyle3D(style);
+    localStorage.setItem('hero3d_style', style);
+  };
 
   const copyEmail = () => {
     navigator.clipboard.writeText('alvinwdntr@gmail.com');
@@ -18,9 +70,27 @@ export default function Hero() {
   };
 
   const stats = [
-    { label: 'Award Recognition', value: '1st Place', desc: 'Creative Visual Competition II', icon: Trophy },
-    { label: 'Core Engineering', value: 'Informatics', desc: 'Web-GIS & Software Systems', icon: Code2 },
-    { label: 'Built Solutions', value: '6+ Live', desc: 'Web-GIS, Flutter, SCM & Games', icon: Cpu },
+    {
+      label: 'Award Recognition',
+      value: 'Top 4 Finalist',
+      desc: 'National Business Case · FEB UNAIR',
+      icon: Trophy,
+      clickable: true,
+    },
+    {
+      label: 'Core Engineering',
+      value: 'Informatics',
+      desc: 'Web-GIS & Software Systems',
+      icon: Code2,
+      clickable: false,
+    },
+    {
+      label: 'Built Solutions',
+      value: '6+ Live',
+      desc: 'Web-GIS, Flutter, SCM & Games',
+      icon: Cpu,
+      clickable: false,
+    },
   ];
 
   return (
@@ -41,7 +111,7 @@ export default function Hero() {
 
       {/* Interactive Three.js 3D Canvas Background */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[340px] h-[340px] sm:w-[500px] sm:h-[500px] md:w-[680px] md:h-[680px] z-0 opacity-45 hover:opacity-90 transition-opacity duration-700 pointer-events-auto">
-        <ThreeCanvas className="w-full h-full" />
+        <ThreeCanvas className="w-full h-full" styleMode={style3D} />
       </div>
 
       {/* Central Screen-Filling Headline (Codecuy Signature) */}
@@ -61,11 +131,41 @@ export default function Hero() {
             Creative Technologist &bull; UI/UX Architect
           </span>
         </div>
+
+        {/* Discreet 3D Style Pill Switcher */}
+        <div className="flex justify-center mt-4">
+          <div className="inline-flex items-center gap-1 p-1 rounded-full bg-ink-soft/90 backdrop-blur-md border border-mist/15 text-[10px] font-mono uppercase tracking-wider text-mist/70 shadow-sm">
+            <span className="pl-2 pr-1 text-mist/40 flex items-center gap-1">
+              <Sparkles className="w-3 h-3 text-ember" />
+              <span className="hidden sm:inline">3D:</span>
+            </span>
+            {(
+              [
+                { id: 'knot', label: 'Ribbon' },
+                { id: 'gyro', label: 'Orbital' },
+                { id: 'wave', label: 'Wave' },
+                { id: 'polyhedron', label: 'Mesh' },
+              ] as const
+            ).map((m) => (
+              <button
+                key={m.id}
+                onClick={() => change3DStyle(m.id)}
+                className={`px-2.5 py-0.5 rounded-full transition-all cursor-pointer ${
+                  style3D === m.id
+                    ? 'bg-ember text-white font-bold shadow-sm'
+                    : 'text-mist/60 hover:text-mist'
+                }`}
+                title={`Switch 3D background to ${m.label}`}
+              >
+                {m.label}
+              </button>
+            ))}
+          </div>
+        </div>
       </div>
 
       {/* Bottom Editorial Bar (Codecuy Style) */}
       <div className="relative z-20 flex flex-col md:flex-row justify-between items-start md:items-end px-6 md:px-12 gap-8">
-        
         {/* Left Subhead */}
         <p className="text-mist font-light uppercase tracking-wide leading-snug max-w-[280px] sm:max-w-[340px] text-xs sm:text-sm md:text-base">
           turning ideas into fast, accessible, and polished web interfaces that refuse to blend in.
@@ -128,12 +228,27 @@ export default function Hero() {
           return (
             <div
               key={i}
-              className="p-5 rounded-2xl bg-ink-soft border border-mist/10 flex items-center justify-between group hover:border-ember/40 transition-colors duration-300"
+              onClick={() => {
+                if (stat.clickable) {
+                  setAwardModalOpen(true);
+                }
+              }}
+              className={`p-5 rounded-2xl bg-ink-soft border border-mist/10 flex items-center justify-between group hover:border-ember/40 transition-colors duration-300 ${
+                stat.clickable ? 'cursor-pointer' : ''
+              }`}
+              title={stat.clickable ? 'Click to view verified awards from CV' : undefined}
             >
               <div>
-                <span className="font-mono text-[10px] uppercase tracking-wider text-mist/40 block mb-1">
-                  {stat.label}
-                </span>
+                <div className="flex items-center gap-1.5 mb-1">
+                  <span className="font-mono text-[10px] uppercase tracking-wider text-mist/40">
+                    {stat.label}
+                  </span>
+                  {stat.clickable && (
+                    <span className="text-[9px] font-mono uppercase px-1.5 py-0.2 rounded bg-ember/15 text-ember">
+                      View all (4)
+                    </span>
+                  )}
+                </div>
                 <span className="font-editorial text-2xl font-black text-mist tracking-tight block">
                   {stat.value}
                 </span>
@@ -148,6 +263,85 @@ export default function Hero() {
           );
         })}
       </div>
+
+      {/* Verified Awards Modal */}
+      <AnimatePresence>
+        {awardModalOpen && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/70 backdrop-blur-md">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 15 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 15 }}
+              transition={{ duration: 0.25 }}
+              className="relative w-full max-w-lg rounded-3xl bg-ink-soft border border-mist/20 p-6 sm:p-8 shadow-2xl text-mist"
+            >
+              <div className="flex items-center justify-between pb-4 border-b border-mist/10">
+                <div className="flex items-center gap-2.5">
+                  <div className="w-9 h-9 rounded-xl bg-ember/15 border border-ember/30 flex items-center justify-center text-ember">
+                    <Trophy className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <h3 className="font-editorial text-xl font-bold uppercase tracking-tight text-mist">
+                      Honors & Awards
+                    </h3>
+                    <p className="font-mono text-[11px] text-mist/50 uppercase tracking-wider">
+                      Verified from Official CV
+                    </p>
+                  </div>
+                </div>
+                <button
+                  onClick={() => setAwardModalOpen(false)}
+                  className="w-8 h-8 rounded-full border border-mist/15 flex items-center justify-center text-mist/60 hover:text-mist hover:border-mist/40 transition-colors cursor-pointer"
+                  aria-label="Close modal"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              </div>
+
+              <div className="mt-5 space-y-3">
+                {AWARDS_LIST.map((aw, idx) => (
+                  <div
+                    key={idx}
+                    className="p-3.5 rounded-2xl bg-ink border border-mist/10 flex items-start justify-between gap-3 hover:border-ember/30 transition-colors"
+                  >
+                    <div>
+                      <div className="flex items-center gap-2 mb-0.5">
+                        <span className="font-editorial text-base font-bold text-ember">
+                          {aw.rank}
+                        </span>
+                        <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-mist/10 text-mist/70">
+                          {aw.year}
+                        </span>
+                      </div>
+                      <h4 className="text-sm font-semibold text-mist leading-tight">
+                        {aw.title}
+                      </h4>
+                      <p className="text-xs text-mist/60 mt-0.5">
+                        {aw.organizer}
+                      </p>
+                    </div>
+                    <span className="text-[10px] font-mono text-mist/40 whitespace-nowrap self-start mt-1">
+                      {aw.tag}
+                    </span>
+                  </div>
+                ))}
+              </div>
+
+              <div className="mt-6 pt-4 border-t border-mist/10 flex justify-between items-center text-xs">
+                <span className="text-mist/50 font-mono text-[11px]">
+                  Total 4 competitive honors
+                </span>
+                <button
+                  onClick={() => setAwardModalOpen(false)}
+                  className="px-4 py-2 rounded-full bg-ember text-white font-medium uppercase tracking-wider text-[11px] hover:opacity-90 transition-opacity cursor-pointer"
+                >
+                  Close
+                </button>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }
