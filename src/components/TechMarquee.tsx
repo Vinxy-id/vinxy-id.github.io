@@ -37,18 +37,18 @@ function BrandTile({ item }: { item: { name: string; slug: string; isMono: boole
   const src = `https://cdn.simpleicons.org/${item.slug}`;
   return (
     <div
-      className="shrink-0 flex flex-col items-center justify-center gap-3 rounded-2xl border border-mist/10 bg-ink-soft transition-all duration-300 hover:border-ember/40 hover:bg-mist/5 group"
-      style={{ width: '220px', height: '150px' }}
+      className="shrink-0 flex flex-col items-center justify-center gap-2 sm:gap-3 rounded-xl sm:rounded-2xl border border-mist/10 bg-ink-soft transition-all duration-300 hover:border-ember/40 hover:bg-mist/5 group w-[130px] h-[95px] sm:w-[170px] sm:h-[120px] md:w-[220px] md:h-[150px]"
     >
       <img
         src={src}
         alt={item.name}
         loading="lazy"
-        className={`h-12 w-12 md:h-16 md:w-16 object-contain transition-transform duration-300 group-hover:scale-110 ${
+        decoding="async"
+        className={`h-7 w-7 sm:h-10 sm:w-10 md:h-14 md:w-14 object-contain transition-transform duration-300 group-hover:scale-110 ${
           item.isMono ? 'icon-mono' : ''
         }`}
       />
-      <span className="font-mono text-[11px] uppercase tracking-wider text-mist/40 group-hover:text-mist transition-colors">
+      <span className="font-mono text-[9px] sm:text-[10px] md:text-[11px] uppercase tracking-wider text-mist/40 group-hover:text-mist transition-colors">
         {item.name}
       </span>
     </div>
@@ -56,42 +56,48 @@ function BrandTile({ item }: { item: { name: string; slug: string; isMono: boole
 }
 
 export default function TechMarquee() {
-  const row1Doubled = [...ROW_1, ...ROW_1, ...ROW_1];
-  const row2Doubled = [...ROW_2, ...ROW_2, ...ROW_2];
+  const row1Doubled = [...ROW_1, ...ROW_1];
+  const row2Doubled = [...ROW_2, ...ROW_2];
 
   return (
-    <section className="bg-ink pt-24 sm:pt-32 md:pt-40 pb-10 overflow-hidden relative z-0">
-      <div className="flex items-center justify-between gap-4 px-6 md:px-12 mb-10 sm:mb-14">
-        <span className="text-mist/50 text-xs sm:text-sm font-medium uppercase tracking-[0.3em]">
+    <section className="bg-ink pt-16 sm:pt-28 md:pt-36 pb-8 sm:pb-10 overflow-hidden relative z-0">
+      <div className="flex items-center justify-between gap-4 px-5 sm:px-8 md:px-12 mb-6 sm:mb-12">
+        <span className="text-mist/50 text-[10px] sm:text-xs md:text-sm font-medium uppercase tracking-[0.2em] sm:tracking-[0.3em]">
           Selected frontend work & tools
         </span>
-        <span className="text-mist/50 text-xs sm:text-sm font-medium uppercase tracking-[0.3em]">
+        <span className="text-mist/50 text-[10px] sm:text-xs md:text-sm font-medium uppercase tracking-[0.2em] sm:tracking-[0.3em]">
           2021 to 2026
         </span>
       </div>
 
-      <div className="pause-hover flex flex-col gap-3.5 overflow-hidden relative">
+      <div className="pause-hover flex flex-col gap-2.5 sm:gap-3.5 overflow-hidden relative" style={{ willChange: 'transform' }}>
         {/* Row 1 */}
         <div className="relative overflow-hidden w-full flex">
-          <div className="animate-marquee flex gap-3.5 pr-3.5">
+          <div className="flex gap-2.5 sm:gap-3.5 animate-marquee" style={{ willChange: 'transform' }}>
             {row1Doubled.map((item, idx) => (
-              <BrandTile key={`r1-${item.slug}-${idx}`} item={item} />
+              <BrandTile key={`${item.name}-${idx}`} item={item} />
+            ))}
+          </div>
+          <div className="flex gap-2.5 sm:gap-3.5 animate-marquee" aria-hidden="true" style={{ willChange: 'transform' }}>
+            {row1Doubled.map((item, idx) => (
+              <BrandTile key={`dup-${item.name}-${idx}`} item={item} />
             ))}
           </div>
         </div>
 
         {/* Row 2 */}
         <div className="relative overflow-hidden w-full flex">
-          <div className="animate-marquee-reverse flex gap-3.5 pr-3.5">
+          <div className="flex gap-2.5 sm:gap-3.5 animate-marquee-reverse" style={{ willChange: 'transform' }}>
             {row2Doubled.map((item, idx) => (
-              <BrandTile key={`r2-${item.slug}-${idx}`} item={item} />
+              <BrandTile key={`${item.name}-${idx}`} item={item} />
+            ))}
+          </div>
+          <div className="flex gap-2.5 sm:gap-3.5 animate-marquee-reverse" aria-hidden="true" style={{ willChange: 'transform' }}>
+            {row2Doubled.map((item, idx) => (
+              <BrandTile key={`dup-${item.name}-${idx}`} item={item} />
             ))}
           </div>
         </div>
-
-        {/* Edge fade */}
-        <div className="absolute inset-y-0 left-0 w-24 sm:w-44 bg-gradient-to-r from-ink to-transparent pointer-events-none z-10" />
-        <div className="absolute inset-y-0 right-0 w-24 sm:w-44 bg-gradient-to-l from-ink to-transparent pointer-events-none z-10" />
       </div>
     </section>
   );

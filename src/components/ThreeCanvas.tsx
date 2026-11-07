@@ -308,9 +308,10 @@ export default function ThreeCanvas({ className = '' }: ThreeCanvasProps) {
   return (
     <div
       ref={containerRef}
-      className={`relative w-full h-full cursor-grab active:cursor-grabbing ${className}`}
+      className={`relative w-full h-full ${className}`}
       style={{
-        touchAction: 'none',
+        touchAction: 'pan-y',
+        pointerEvents: 'none', // Allow touch & scroll to pass smoothly to the page
         maskImage: 'radial-gradient(ellipse 95% 85% at 50% 50%, black 50%, transparent 100%)',
         WebkitMaskImage: 'radial-gradient(ellipse 95% 85% at 50% 50%, black 50%, transparent 100%)',
       }}
