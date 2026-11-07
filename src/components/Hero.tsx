@@ -8,7 +8,6 @@ import { motion, AnimatePresence } from 'motion/react';
 import {
   ArrowDown,
   Download,
-  Sparkles,
   Copy,
   Check,
   Trophy,
@@ -18,7 +17,7 @@ import {
   X,
   Award,
 } from 'lucide-react';
-import ThreeCanvas, { Three3DStyle } from './ThreeCanvas';
+import ThreeCanvas from './ThreeCanvas';
 
 const AWARDS_LIST = [
   {
@@ -54,14 +53,6 @@ const AWARDS_LIST = [
 export default function Hero() {
   const [copied, setCopied] = useState(false);
   const [awardModalOpen, setAwardModalOpen] = useState(false);
-  const [style3D, setStyle3D] = useState<Three3DStyle>(() => {
-    return (localStorage.getItem('hero3d_style') as Three3DStyle) || 'knot';
-  });
-
-  const change3DStyle = (style: Three3DStyle) => {
-    setStyle3D(style);
-    localStorage.setItem('hero3d_style', style);
-  };
 
   const copyEmail = () => {
     navigator.clipboard.writeText('alvinwdntr@gmail.com');
@@ -109,9 +100,9 @@ export default function Hero() {
         </span>
       </div>
 
-      {/* Interactive Three.js 3D Canvas Background */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[340px] h-[340px] sm:w-[500px] sm:h-[500px] md:w-[680px] md:h-[680px] z-0 opacity-45 hover:opacity-90 transition-opacity duration-700 pointer-events-auto">
-        <ThreeCanvas className="w-full h-full" styleMode={style3D} />
+      {/* Interactive Full-Bleed 3D Cyber Wavefield */}
+      <div className="absolute inset-0 w-full h-full z-0 overflow-hidden opacity-60 hover:opacity-90 transition-opacity duration-700 pointer-events-auto">
+        <ThreeCanvas className="w-full h-full" />
       </div>
 
       {/* Central Screen-Filling Headline (Codecuy Signature) */}
@@ -130,37 +121,6 @@ export default function Hero() {
           <span className="text-mist/60 font-mono text-xs sm:text-sm uppercase tracking-[0.3em] font-medium">
             Creative Technologist &bull; UI/UX Architect
           </span>
-        </div>
-
-        {/* Discreet 3D Style Pill Switcher */}
-        <div className="flex justify-center mt-4">
-          <div className="inline-flex items-center gap-1 p-1 rounded-full bg-ink-soft/90 backdrop-blur-md border border-mist/15 text-[10px] font-mono uppercase tracking-wider text-mist/70 shadow-sm">
-            <span className="pl-2 pr-1 text-mist/40 flex items-center gap-1">
-              <Sparkles className="w-3 h-3 text-ember" />
-              <span className="hidden sm:inline">3D:</span>
-            </span>
-            {(
-              [
-                { id: 'knot', label: 'Ribbon' },
-                { id: 'gyro', label: 'Orbital' },
-                { id: 'wave', label: 'Wave' },
-                { id: 'polyhedron', label: 'Mesh' },
-              ] as const
-            ).map((m) => (
-              <button
-                key={m.id}
-                onClick={() => change3DStyle(m.id)}
-                className={`px-2.5 py-0.5 rounded-full transition-all cursor-pointer ${
-                  style3D === m.id
-                    ? 'bg-ember text-white font-bold shadow-sm'
-                    : 'text-mist/60 hover:text-mist'
-                }`}
-                title={`Switch 3D background to ${m.label}`}
-              >
-                {m.label}
-              </button>
-            ))}
-          </div>
         </div>
       </div>
 
